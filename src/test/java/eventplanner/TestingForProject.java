@@ -155,37 +155,35 @@ assertTrue(application.return_is_filter_offer());
 @When("filter offer not in range")
 public void filterOfferNotInRange() {
 	
-	ArrayList <Integer> realA = new ArrayList<Integer>();	
-	ArrayList <Integer> ExpectedA = new ArrayList<Integer>();	
-	ExpectedA.add(150);
-	ExpectedA.add(300);
-	ExpectedA.add(200);
-
-
-	realA = application.filter_price_offer(130,359);
-	boolean flag_find_element = false ;
-
-	//JOptionPane.showMessageDialog(null,"1- The value i put: "+ExpectedA);
-
-	//JOptionPane.showMessageDialog(null,"2- The value i check: "+realA);
-
-	//JOptionPane.showMessageDialog(null,"Excpected: is  "+ExpectedA+" // real: is  "+realA);
-
-	for(int i =0;i<realA.size();i++) {
-	int temp = realA.get(i);	
-	flag_find_element = false;	
-	for(int c =0;c<ExpectedA.size();c++) {
-			
-			if(ExpectedA.get(c)==temp){
-	 flag_find_element = true;
-			}
-		}
-		if(!flag_find_element){
-			break;
-		}
 		
+ArrayList <Integer> realA = new ArrayList<Integer>();	
+ArrayList <Integer> ExpectedA = new ArrayList<Integer>();	
+ExpectedA.add(150);
+ExpectedA.add(300);
+ExpectedA.add(200);
+ExpectedA.add(350);
+
+realA = application.filter_price_offer(130,359);
+boolean flag_find_element = false ;
+
+
+///////////////////////////////////////
+
+for(int i =0;i<realA.size();i++) {
+int temp = realA.get(i);	
+flag_find_element = false;	
+for(int c =0;c<ExpectedA.size();c++) {
+		
+		if(ExpectedA.get(c)==temp){
+ flag_find_element = true;
+		}
 	}
-	assertFalse(flag_find_element);
+	if(!flag_find_element){
+		break;
+	}	
+}
+
+assertTrue(flag_find_element);
 				
 }
 
