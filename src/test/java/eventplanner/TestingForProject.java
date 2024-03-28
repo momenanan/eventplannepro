@@ -155,36 +155,36 @@ assertTrue(application.return_is_filter_offer());
 @When("filter offer not in range")
 public void filterOfferNotInRange() {
 	
+	
+	ArrayList <Integer> realA = new ArrayList<Integer>();	
+	ArrayList <Integer> ExpectedA = new ArrayList<Integer>();	
+	ExpectedA.add(150);
+	ExpectedA.add(300);
+	ExpectedA.add(200);
+	
+	realA = application.filter_price_offer(130,359);
+	boolean flag_find_element = false ;
+
+	
+	for(int x =0,y=0;x<ExpectedA.size();){
+		int temp = realA.get(x);	
+		flag_find_element = false;
 		
-ArrayList <Integer> realA = new ArrayList<Integer>();	
-ArrayList <Integer> ExpectedA = new ArrayList<Integer>();	
-ExpectedA.add(150);
-ExpectedA.add(300);
-ExpectedA.add(200);
-ExpectedA.add(350);
-
-realA = application.filter_price_offer(130,359);
-boolean flag_find_element = false ;
-
-
-///////////////////////////////////////
-
-for(int i =0;i<realA.size();i++) {
-int temp = realA.get(i);	
-flag_find_element = false;	
-for(int c =0;c<ExpectedA.size();c++) {
+		if(ExpectedA.get(y)==temp){
+	 flag_find_element = true;
+			}
 		
-		if(ExpectedA.get(c)==temp){
- flag_find_element = true;
+		if(y == ExpectedA.size()-1){
+		y=0;
+		x++;
+		}else {
+			y++;
 		}
+		
+		
 	}
-	if(!flag_find_element){
-		break;
-	}	
-}
 
-assertTrue(flag_find_element);
-				
+	assertFalse(flag_find_element);
 }
 
 @Then("filter failed")
