@@ -1,175 +1,88 @@
-package eventplanner;
-
-
-import java.sql.SQLException;
-import java.sql.Statement;
-
-import javax.swing.JOptionPane;
-
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class UserLoginPage {
-    private String WhoLastLogIn;
-    private boolean UserLogInPass;
-	protected boolean Admin_is_login; // declaring the flag to chekck id the admin id login to the system or not
-	protected boolean user_is_login; 
-	protected boolean sutvise_is_login;
-	
-	protected boolean login_flag;
-	
-	protected String type_admin="admin";
-	protected String type_user="users";
-	protected String type_sutvise="survise";
-	
-	protected String user_email;
-	protected String user_password;
-	private int UserIDFromDB;
-	public int getUID() {
-		return UserIDFromDB;
-	}
-	public UserLoginPage() // initilazation for this calss
-	{
-		Admin_is_login=false;
-		user_is_login=false;
-		sutvise_is_login=false;
-		
-		login_flag=false;
-		
-		user_email=null;
-		user_password=null;
-	}
-	
-	public UserLoginPage(String user_email, String user_password) { 
-		// TODO Auto-generated constructor stub
-		this.user_email=user_email;
-		this.user_password=user_password;
-	}
+    private boolean adminLoggedIn;
+    private boolean userLoggedIn;
+    private boolean supervisorLoggedIn;
+    private boolean loginFlag;
+    private String lastLoginType;
+    private String userEmail;
+    private int userIdFromDB;
 
-	public boolean is_valid_credentials(String user_email, String user_password,String type_of) throws SQLException {
-		// TODO Auto-generated method stub
-		 connectDB conDB = new connectDB();
-		 conDB.testConn();
-		 String sql = "SELECT * FROM "+type_of+"";
-		
-		 try {
-        //        PreparedStatement stmt = conDB.getConnection().prepareStatement(sql)) 
-		       Statement stmt = conDB.getConnection().createStatement();
-				 
-				 
-	       // stmt.setString(1, user_email);
-	      //  stmt.setString(2, user_password);
-	        ResultSet resultSet = stmt.executeQuery(sql);
-			
-	        while(resultSet.next()) {
-	        	
-	        String s1=resultSet.getString(6);
-	        String s2=resultSet.getString(7);
-		   
-	        if(s1.equals(user_email)&&s2.equals(user_password)) {
-	        	 System.out.printf("s1: "+s1+"\n");
-	 		     System.out.printf("s2: "+s2+"\n");
-	 		     
-		    	
-
-
-					this.Admin_is_login=false;
-					this.user_is_login=false;
-					this.sutvise_is_login=false;
-					this.login_flag=false;
-			
-			
-			
-					if(type_of.equals(type_admin))
-					{
-						
-						this.Admin_is_login=true;
-						this.login_flag=true;
-						WhoLastLogIn=type_admin;
-					return true;
-					}
-					else if(type_of.equals(type_user)) 
-					{
-						UserIDFromDB=resultSet.getInt(1);
-						this.user_is_login=true;
-						UserLogInPass=this.login_flag=true;
-						WhoLastLogIn=type_user;
-					return true;
-					}  
-					else 
-					{
-						this.sutvise_is_login=true;
-						this.login_flag=true;
-						WhoLastLogIn=type_sutvise;
-				return true;
-					}
-								
-	     }		
-	        
-	        }
-	  return false;
-		}
-		catch(SQLException e)
-		{
-			System.out.print(e);
-		}
-		return false;
-	}
-
-	public boolean is_user_logged() 
-	{
-		return this.login_flag;
-	}
-	
-	public boolean Logout() 
-	{
-		this.login_flag=false;
-		return this.login_flag;
-	}
-	
-	public boolean is_Admin_logged()
-	{
-	  return this.Admin_is_login;	
-	}
-	
-	public boolean is_Customer_logged()
-	{
-		return this.user_is_login;
-	}
-	
-	public boolean is_Installer_logged()
-	{
-		return this.sutvise_is_login;
-	}
-	
-	public boolean Admin_logout()
-	{
-		this.Admin_is_login=false;
-		return this.Admin_is_login;
-	}
-	
-	public boolean Customer_logout()
-	{
-		this.user_is_login=false;
-		return this.user_is_login;
-	}
-	
-	public boolean Installer_logout()
-	{
-		this.sutvise_is_login=false;
-		return this.sutvise_is_login;
-	}
-
-    public String getUser_email() {
-        return this.user_email;
-    }
-    
-    public String getWhoLogIn(){
-    return WhoLastLogIn;	
-    	
-    }
-    public boolean getIfUserLogIn(){
-    	return UserLogInPass;
+    public UserLoginPage() {
+        adminLoggedIn = false;
+        userLoggedIn = false;
+        supervisorLoggedIn = false;
+        loginFlag = false;
+        userEmail = null;
     }
 
+    public boolean isValidCredentials(String userEmail, String userPassword, String userType) {
+        try (Connection connection = connectDB.getConnection();
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + userType + " WHERE email = ? AND password = ?")) {
+
+            statement.setString(1, userEmail);
+            statement.setString(2, userPassword);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                userIdFromDB = resultSet.getInt(1);
+                lastLoginType = userType;
+                loginFlag = true;
+
+                if (userType.equals("admin")) {
+                    adminLoggedIn = true;
+                } else if (userType.equals("users")) {
+                    userLoggedIn = true;
+                } else {
+                    supervisorLoggedIn = true;
+                }
+
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean isUserLoggedIn() {
+        return userLoggedIn;
+    }
+
+    public boolean isAdminLoggedIn() {
+        return adminLoggedIn;
+    }
+
+    public boolean isSupervisorLoggedIn() {
+        return supervisorLoggedIn;
+    }
+
+    public boolean isAnyUserLoggedIn() {
+        return loginFlag;
+    }
+
+    public boolean logout() {
+        adminLoggedIn = false;
+        userLoggedIn = false;
+        supervisorLoggedIn = false;
+        loginFlag = false;
+        userEmail = null;
+        return true;
+    }
+
+    public String getLastLoginType() {
+        return lastLoginType;
+    }
+
+    public int getUserIdFromDB() {
+        return userIdFromDB;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
 }
