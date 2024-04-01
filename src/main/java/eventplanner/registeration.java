@@ -7,14 +7,14 @@ import java.util.logging.Logger;
 
 public class Registration {
 
-    protected String user_email;
-    protected String user_password;
-    protected String user_type;
+    protected String useremail;
+    protected String userpassword;
+    protected String usertype;
     static final Logger logger = Logger.getLogger(Registration.class.getName());
 
     public Registration() {
-        user_email = null;
-        user_password = null;
+        useremail = null;
+        userpassword = null;
     }
 
     public void setData(String user_email, String user_password, String type) {
@@ -27,8 +27,8 @@ public class Registration {
         }
         String sql = "INSERT INTO systemusers (user_email, user_password, user_type) VALUES (?, ?, ?)";
         try (PreparedStatement stmt = conn.getConnection().prepareStatement(sql)) {
-            stmt.setString(1, user_email);
-            stmt.setString(2, user_password);
+            stmt.setString(1, useremail);
+            stmt.setString(2, userpassword);
             stmt.setString(3, type);
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected > 0) {
