@@ -422,6 +422,7 @@ public boolean get_search_vendor(int n_vendor){
 						return is_search_pass=rs_offer.getBoolean(4);					
 					}
 				}
+
 				
 				return false;
 				} catch (SQLException e) {
