@@ -1,11 +1,11 @@
 package eventplanner;
-import java.sql.SQLException;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-public class connectDB {
+
+public class ConnectDB{
 	protected Connection connection; 
 	
 	public void testConn() throws SQLException {
