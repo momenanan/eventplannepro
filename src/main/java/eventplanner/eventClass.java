@@ -2,46 +2,62 @@ package eventplanner;
 
 import java.sql.Date;
 
-public class eventClass {
+public class EventClass {
 
-	private int e_idCla;
-private String Per_ofEventCla;
-private Date Date_event;
-private String LocCla;
-private int Num_gCla;
-private String Desc_Cla;
-private int User_FKCla;
-private int ven_fk_Cla;
-private int sp_fk_Cla;
+    private int eventId;
+    private String periodOfEvent;
+    private Date dateEvent;
+    private String location;
+    private int numGuests;
+    private String description;
+    private int userForeignKey;
+    private int venueForeignKey;
+    private int serviceProviderForeignKey;
 
-public void set_eid(int x){
-	e_idCla = x;	
-}
-public void set_period(String s){
-	Per_ofEventCla = s;
-}
-public void set_Date(Date t){
-	Date_event =t;	
-}		
-public void set_Loc(String s) {
-	LocCla=s;
-}	
-public void set_Num_gCla(int n){		
-	Num_gCla=n;
-}
-public void set_Desc(String s){
-	Desc_Cla=s;
-}
-public void set_User(int u){
-	User_FKCla=u;	
-}
+    // Constructors
+    public EventClass() {
+        // Default constructor
+    }    
 
-public void set_VenFK(int v) {
-	ven_fk_Cla=v;
-}
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
+    }
 
-public void set_spFK(int s) {
-	sp_fk_Cla=s;
-}
+   
 
+    public void setPeriodOfEvent(String periodOfEvent) {
+        this.periodOfEvent = periodOfEvent;
+    }
+
+   
+
+    public void setDateEvent(Date dateEvent) {
+        this.dateEvent = dateEvent;
+    }
+
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    
+    public void setNumGuests(int numGuests) {
+        this.numGuests = numGuests;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setUserForeignKey(int userForeignKey) {
+        this.userForeignKey = userForeignKey;
+    }   
+
+    public void setVenueForeignKey(int venueForeignKey) {
+        this.venueForeignKey = venueForeignKey;
+    }
+
+    public void setServiceProviderForeignKey(int serviceProviderForeignKey) {
+        this.serviceProviderForeignKey = serviceProviderForeignKey;
+    }
 }
