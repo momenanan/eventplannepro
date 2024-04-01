@@ -2,6 +2,7 @@ package eventplanner;
 
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,14 +16,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-
-
+import javax.swing.JOptionPane;
 
 public class Main {
 
-    private YearMonth currentYearMonth;
-    private Map<LocalDate, List<String>> eventsMap; // Map to store events for each date
-
+    private static YearMonth currentYearMonth;
+    private static Map<LocalDate, List<String>> eventsMap; // Map to store events for each date
+    private static UserLoginPage logInPage = new UserLoginPage();
+    private static Apps CalendarObj = new Apps();
+    
+    
+    //////////////////////////////////////////////////////////
     // Database connection details
     private String url = "jdbc:postgresql://localhost:5432/postgres";
     private String userDB = "postgres";
@@ -52,7 +56,7 @@ public class Main {
         eventsMap.put(LocalDate.now().plusDays(10), events3);
     }
 
-    public void viewCalendar() {
+    public static void viewCalendar() {
     	System.out.println("Calendar View:");
         System.out.println("+------------+--------------------------------------------+");
         System.out.println("|    Date    |                   Events                   |");
@@ -60,19 +64,23 @@ public class Main {
 
         // Iterate over each day in the month
         LocalDate startDate = currentYearMonth.atDay(1);
+        
         LocalDate endDate = currentYearMonth.atEndOfMonth();
-
-        while (!startDate.isAfter(endDate)) {
+        
+        while(!startDate.isAfter(endDate)) {
             // Format date
             String formattedDate = startDate.format(DateTimeFormatter.ofPattern("MMM d, yyyy"));
 
+            
             // Check if the date has any events
             List<String> events = eventsMap.getOrDefault(startDate, new ArrayList<>());
             String eventString = String.join("\n", events);
 
+            
             // Print date and events
             System.out.printf("| %-11s| %-42s|\n", formattedDate, eventString.isEmpty() ? "No events" : eventString);
 
+            
             // Move to the next day
             startDate = startDate.plusDays(1);
         }
@@ -129,7 +137,177 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Main calendar = new Main();
+        
+    	
+    	//Application a2 = new Application();
+    	//a2.setCalender("2024-05-03",3,4,true);
+    	
+    	System.out.println("Welcome In Event Planner System \n   " +
+                " Plases Choose Role : \n" +
+                "1- Admin \n" +
+                "2- User \n" +
+                "3- Service Provider \n");
+
+        System.out.println("Enter Number 1/2/3 \n");
+        Scanner s = new Scanner(System.in);
+        //int Choose = s.findInLine(".").charAt(0);
+       int Choose = s.nextInt();
+System.out.printf("your choose is: "+Choose+"\n");
+        if(Choose == 1){
+            System.out.println("Welcome In Admin Page" +
+                    " Plases Choose Page : \n" +
+                    "1-SignIn/Register \n" +
+                    "2-SignUP/Login \n");
+
+            System.out.println("Enter Number 1/2 \n");
+            Scanner p = new Scanner(System.in);
+            int ChoosePage = p.findInLine(".").charAt(0);
+
+            if(ChoosePage==1){
+
+          	  // Register Page
+            }
+
+            if(ChoosePage==2){
+        
+          	  // Login Page
+            }
+
+        }
+        
+        if(Choose == 2){
+            System.out.println("Welcome In User Page" +
+                    " Plases Choose Page : \n" +
+                    "1- SignIn/Register \n" +
+                    "2- SignUP/Login \n");
+
+
+            System.out.println("Enter Number 1/2 in user page \n");
+            Scanner p = new Scanner(System.in);
+            //int ChoosePage = p.findInLine(".").charAt(0);
+          int ChoosePage = p.nextInt();
+            System.out.printf("chose page is "+ ChoosePage+"\n");
+            if(ChoosePage==1){
+          	  // Register Page
+            }
+
+            if(ChoosePage==2){
+          	  // Login Page
+      System.out.printf("helo log in user: \n");           
+                 
+          	  System.out.printf("please enter UserName:+\n");              
+                 Scanner ScannerUserName = new Scanner(System.in);
+                 String LineUserName=ScannerUserName.nextLine();
+                 System.out.printf("userName you enter is : "+LineUserName+"\n"); 
+                     
+                 System.out.printf("please enter password:+\n");              
+                 Scanner ScannerPassword = new Scanner(System.in);
+                 String LinePassword=ScannerUserName.nextLine();
+                System.out.printf("your password enter is :"+ LinePassword+"\n"); 
+        
+                try {	
+                	
+                	boolean t;
+                    if(t = (logInPage.is_valid_credentials(LineUserName,LinePassword,"users")))
+                    {
+                    	int userID=logInPage.getUID();
+//                    	t = (logInPage.is_valid_credentials(LineUserName,LinePassword,"users"))
+                    	System.out.printf("log in flag: "+t);
+                    	System.out.printf("Please choose on of these operation: \n");
+                      Scanner chooseFromLogIn=new Scanner(System.in);
+                      
+                      System.out.printf("1- create Event:- "+"\n"+"2-");
+ 
+                      int x = chooseFromLogIn.nextInt();
+                      if(x == 1){
+                    	 Application a = new Application();
+                                         	 
+                   System.out.printf("enter The venue you want:\n");	
+                         int v1= chooseFromLogIn.nextInt();
+                   System.out.printf("enter The Number of guist:\n");	
+                         int g1=chooseFromLogIn.nextInt(); 
+                   System.out.printf("enter year:\n");	
+                  Main m = new Main();       
+                  Apps Ap1=new Apps();
+                  Ap1.viewCalendar();
+                  System.out.printf("These wich are  time you can't booking:\n"); 
+                  int y = chooseFromLogIn.nextInt(); 
+                  System.out.printf("Enter month please:\n");
+                  int m1 = chooseFromLogIn.nextInt();               
+                  System.out.printf("Enter Day please\n");
+                   int d1 = chooseFromLogIn.nextInt();
+                   
+                   String Da = y+"-"+m1+"-"+d1;
+                   
+                   //////////////////////
+                         System.out.printf("enter hour to start event:\n");
+                         int s1 = chooseFromLogIn.nextInt(); 
+                         System.out.printf("enter hour to end event:\n");
+                         int e1 = chooseFromLogIn.nextInt();
+                         ///////////////////
+                   System.out.printf("enter amenetis:\n");
+                   String a1 = chooseFromLogIn.nextLine();
+                   
+                   ////////////////////
+    
+                   a.Go_book(v1,g1,Da,s1,e1,a1,userID);                    	
+    
+                      }
+                      
+                    	
+                    }else {
+        
+                    	System.out.printf("Sorry Log In faild");
+                    }
+                    
+			 	    
+                                           	
+                
+                } catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+                
+            }
+
+        }
+
+        
+        
+        if(Choose == 3){
+            System.out.println("Welcome In Service Provider Page" +
+                    " Plases Choose Page : \n" +
+                    "1- SignIn/Register \n" +
+                    "2- SignUP/Login \n");
+
+
+            System.out.println("Enter Number 1/2 \n");
+            Scanner p = new Scanner(System.in);
+            int ChoosePage = p.findInLine(".").charAt(0);
+
+
+            if(ChoosePage==1){
+                // Register Page
+            }
+
+            if(ChoosePage==2){
+                // Login Page
+            }
+        
+            System.out.println("Wasan awwade" );
+            System.out.println("Wasan awwade" );
+        
+        }
+
+   
+  		
+    	
+/////////////////////////////////////////////////////////    	
+
+    
+/////////////////////////
+    /* 
+    Main calendar = new Main();
         Scanner scanner = new Scanner(System.in);
 
         // View the calendar
@@ -178,6 +356,7 @@ public class Main {
         calendar.viewCalendar();
 
         scanner.close();
+    */
     }
 }
     
