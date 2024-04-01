@@ -15,13 +15,15 @@ public class connectDB {
 	
 	public void testConn() throws SQLException {
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            		connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/event1","root","");
+           	
+            		String url = "jdbc:postgresql://localhost:5432/postgres";
+            		String userDB ="postgres";
+            		String passwordDB="12345";
+            	   				
+            					connection =DriverManager.getConnection(url,userDB,passwordDB);;
+            		
             		//System.out.print("connected to DB done successfully");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        
     }
 
 	public Connection getConnection() 
