@@ -24,10 +24,10 @@ public class ConnectDB {
         String user = "postgres";
         String password = "12345";
         try {
-            connection = DriverManager.getConnection(url, user, password);
-            System.out.println("Connected to the database successfully.");
+            connection = DriverManager.getConnection(url, user, Password);
+            logger.log(Level.INFO,"Connected to the database successfully.")
         } catch (SQLException e) {
-            System.err.println("Error connecting to the database: " + e.getMessage());
+            logger.log(Level.INFO,"Error connecting to the database")
             throw e; // Propagate the exception to the caller for handling
         }
     }
@@ -36,14 +36,6 @@ public class ConnectDB {
         return connection;
     }
 
-    public void closeConnection() {
-        if (connection != null) {
-            try {
-                connection.close();
-                System.out.println("Database connection closed.");
-            } catch (SQLException e) {
-                System.err.println("Error closing the database connection: " + e.getMessage());
-            }
-        }
-    }
+   
+    
 }
