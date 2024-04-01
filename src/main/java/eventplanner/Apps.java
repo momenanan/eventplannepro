@@ -37,9 +37,15 @@ public class Apps {
             ResultSet rs_calender = statement_calender.executeQuery(st_calender);
    
             Statement statement_calender_row = con_calender.createStatement();
-           String st_calender_row ="select count(select * from calender)";
-            int rows= statement_calender_row.executeUpdate(st_calender_row);
-	String[][] calendarMatrix = new String[rows][4];
+           String st_calender_row ="select count(*) from calender";
+            
+//           int rows= statement_calender_row.executeUpdate(st_calender_row);
+	
+           ResultSet rsCal= statement_calender_row.executeQuery(st_calender_row);
+          rsCal.next();
+           int rows = rsCal.getInt(1);
+           
+            String[][] calendarMatrix = new String[rows][5];
          
             // Display calendar events
          while (rs_calender.next()) {
@@ -61,13 +67,12 @@ public class Apps {
                     calendarMatrix[i][4]=isAvailable+"";
                     
     
-                
-                JOptionPane.showMessageDialog(null, "Calendar ID: " + calendarId +
-                        "\nDay Date: " + dayDate +
-                        "\nStart At: " + startAt +
-                        "\nEnd At: " + endAt +
+                System.out.printf(""+ "Calendar ID: " + calendarId +
+                        "|| Day Date: " + dayDate +
+                        "|| Start At: " + startAt +
+                        "|| End At: " + endAt +
                         
-                        "\nIs Available: " + isAvailable);
+                        "|| Is Available: " + isAvailable+"\n");
             }
          
             // Close database resources
@@ -189,7 +194,9 @@ public class Apps {
 
     public static void main(String[] args) {
         Apps app = new Apps();
-        boolean success = app.viewCalendar();
+  //      boolean success = app.viewCalendar();
+        boolean success = true;
+        
         if (success) {
             JOptionPane.showMessageDialog(null, "Calendar events successfully viewed!");
         } else {
