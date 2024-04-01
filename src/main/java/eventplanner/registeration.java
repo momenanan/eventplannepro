@@ -17,7 +17,7 @@ public class Registration {
         userpassword = null;
     }
 
-    public void setData(String user_email, String user_password, String type) {
+    public void setData(String useremail, String userpassword, String type) {
         connectDB conn = new connectDB();
         conn.testConn();
 
