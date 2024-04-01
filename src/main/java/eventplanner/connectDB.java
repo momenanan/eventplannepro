@@ -17,9 +17,9 @@ public class ConnectDB{
            	
             		String url = "jdbc:postgresql://localhost:5432/postgres";
             		String userDB ="postgres";
-            		String Password="12345";
+            		String password="12345";
             	   				
-            					connection =DriverManager.getConnection(url,userDB,Password);;
+            					connection =DriverManager.getConnection(url,userDB,password);;
             		
  logger.log(Level.INFO,"connection sussesfully");
     }
