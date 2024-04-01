@@ -19,7 +19,7 @@ public class ConnectDB{
             		String userDB ="postgres";
             		String password="12345";
             	   				
-            					connection =DriverManager.getConnection(url,userDB,password);;
+            					connection =DriverManager.getConnection(url,userDB,password);
             		
  logger.log(Level.INFO,"connection sussesfully");
     }
