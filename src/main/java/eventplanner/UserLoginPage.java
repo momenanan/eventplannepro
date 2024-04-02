@@ -40,19 +40,17 @@ public class UserLoginPage {
 		this.user_email=user_email;
 		this.user_password=user_password;
 	}
-	public boolean is_valid_credentials(String user_email, String user_password,String type_of) throws SQLException {
+	
+	public boolean isValidCredentials(String user_email, String user_password,String type_of) throws SQLException {
 		// TODO Auto-generated method stub
-		 connectDB conDB = new connectDB();
-		 conDB.testConn();
+		 ConnectDB conDB = new ConnectDB();
+		 
 		 String sql = "SELECT * FROM "+type_of+"";
 		
 		 try {
-        //        PreparedStatement stmt = conDB.getConnection().prepareStatement(sql)) 
-		       Statement stmt = conDB.getConnection().createStatement();
+    	       Statement stmt = conDB.getConnection().createStatement();
 				 
 				 
-	       // stmt.setString(1, user_email);
-	      //  stmt.setString(2, user_password);
 	        ResultSet resultSet = stmt.executeQuery(sql);
 			
 	        while(resultSet.next()) {
@@ -106,7 +104,18 @@ public class UserLoginPage {
 			System.out.print(e);
 		}
 		return false;
+		
+		
+		
+		/////////////////////////////
+		
+			
 	}
+
+	
+	
+	
+	
 	public boolean is_user_logged() 
 	{
 		return this.login_flag;
@@ -153,12 +162,13 @@ public class UserLoginPage {
     public String getUser_email() {
         return this.user_email;
     }
-New code
+
     
     public String getWhoLogIn(){
     return WhoLastLogIn;	
     	
     }
+ 
     public boolean getIfUserLogIn(){
     	return UserLogInPass;
     }
