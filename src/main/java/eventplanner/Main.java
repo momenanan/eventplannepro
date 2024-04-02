@@ -18,6 +18,9 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Main {
 
     private static YearMonth currentYearMonth;
@@ -26,7 +29,7 @@ public class Main {
     private static Registration registration = new Registration();
     
     private static Apps calendarObj = new Apps();
-	    private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
+	 private static final Logger logger = Logger.getLogger(Main.class.getName());
 	    private static final String SEPARATOR_LINE = "+------------+--------------------------------------------+";
 
 
@@ -63,10 +66,10 @@ public class Main {
     }
 
     public static void viewCalendar() {
-    	 LOGGER.info("Calendar View:");
-        LOGGER.info(SEPARATOR_LINE);
-        LOGGER.info("|    Date    |                   Events                   |");
-        LOGGER.info(SEPARATOR_LINE);
+    	 logger.log(Level.INFO,"Calendar View:");
+        logger.log(Level.INFO,SEPARATOR_LINE);
+        logger.log(Level.INFO,"|    Date    |                   Events                   |");
+        logger.log(Level.INFO,SEPARATOR_LINE);
 
         // Iterate over each day in the month
         LocalDate startDate = currentYearMonth.atDay(1);
@@ -92,7 +95,7 @@ public class Main {
         }
 
         // Print calendar footer
-LOGGER.info(SEPARATOR_LINE);
+  LOGGER.info(SEPARATOR_LINE);
     }
 
     public void createTask(LocalDate date, String time, String description) {
