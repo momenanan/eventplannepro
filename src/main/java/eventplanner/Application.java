@@ -109,7 +109,7 @@ public boolean doesVenueAv(int vNumber){
 			}
 			return false;
 	
-		} catch (SQLException e) {
+		} finally {
 			e.printStackTrace();
       return false;
 		}
