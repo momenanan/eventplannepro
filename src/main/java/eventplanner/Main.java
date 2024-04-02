@@ -144,18 +144,17 @@ LOGGER.info(SEPARATOR_LINE);
 
     public static void main(String[] args) {
         
-    	System.out.println("Welcome In Event Planner System \n   " +
+    	LOGGER.info("Welcome In Event Planner System \n   " +
                 " Plases Choose Role : \n" +
                 "1- Admin \n" +
                 "2- User \n" +
                 "3- Service Provider \n");
 
-        System.out.println("Enter Number 1/2/3 \n");
+        LOGGER.info("Enter Number 1/2/3 \n");
         Scanner s = new Scanner(System.in);
-        //int Choose = s.findInLine(".").charAt(0);
-       int Choose = s.nextInt();
+       int choose = s.nextInt();
    System.out.printf("your choose is: "+Choose+"\n");
-        if(Choose == 1){
+        if(choose == 1){
             System.out.println("Welcome In Admin Page" +
                     " Plases Choose Page : \n" +
                     "1-SignIn/Register \n" +
