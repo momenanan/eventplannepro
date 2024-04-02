@@ -88,6 +88,7 @@ public boolean doesVenueAv(int vNumber){
 	String passwordDB=System.getenv(PASSWORDDB);
 	  
 	  String stVenue = SELECTALLFROMVENUE;
+	  
 		try(Connection conVenue=DriverManager.getConnection(url,userDB,passwordDB) ) {
 			Statement statementVenue=conVenue.createStatement();				
 			ResultSet rsVenue = statementVenue.executeQuery(stVenue);
@@ -117,16 +118,9 @@ public boolean doesVenueAv(int vNumber){
 			}
 			finally
 			{
-				try {
-        if (statementVenue != null) {
-            statementVenue.close();
-        }
-        if (conVenue != null) {
-            conVenue.close();
-        }
-    } catch (SQLException e) {
-        e.printStackTrace(); // Or any other error handling mechanism
-    }
+				
+        
+     
       
 		}
 
