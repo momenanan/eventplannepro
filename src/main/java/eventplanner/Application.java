@@ -327,7 +327,7 @@ public int numberColumnAfterFilter(int minPrice,int maxPrice) {
 	}	 
 		
 }
-public ArrayList<Integer> filter_price_offer(int minPrice,int maxPrice){
+public List<Integer> filterPriceOffer(int minPrice,int maxPrice){
 	
 	String url = DBURL;
 	String userDB =POSTGRESDBNAME;
@@ -368,7 +368,7 @@ public ArrayList<Integer> filter_price_offer(int minPrice,int maxPrice){
 /////////////////////////////////////////////////
 
 
-public ArrayList<Integer> filter_price_venue(int minPrice,int maxPrice){
+public ArrayList<Integer> filterPriceVenue(int minPrice,int maxPrice){
 	
 	String url = DBURL;
 	String userDB =POSTGRESDBNAME;
