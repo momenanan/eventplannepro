@@ -88,8 +88,7 @@ public boolean doesVenueAv(int vNumber){
 	String passwordDB=PASSWORDDB;
 	  
 	  String stVenue = SELECTALLFROMVENUE;
-		try {
-			Connection conVenue=DriverManager.getConnection(url,userDB,passwordDB); 
+		try(Connection conVenue=DriverManager.getConnection(url,userDB,passwordDB); ) {
 			Statement statementVenue=conVenue.createStatement();				
 			ResultSet rsVenue = statementVenue.executeQuery(stVenue);
 			
