@@ -1,9 +1,13 @@
 package eventplanner;
 
+import java.sql.Statement;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.JOptionPane;
 
 public class Registration {
 
@@ -17,27 +21,17 @@ public class Registration {
         userpassword = null;
     }
 
-    public void setData(String useremail, String userpassword, String type) {
-        connectDB conn = new connectDB();
-        conn.testConn();
+    public void setData(String fname,String secN,String LastN,String useremail, String username,String password,String BD, String type) throws SQLException {
+         ConnectDB conn = new ConnectDB();
+        Connection conn1 = conn.getConnection();
+       
+       Statement stConn = conn1.createStatement();
+       
+       String sqlReg = "insert into "+type+" values(default,"+"'"+fname+"',"+"'"+secN+"',"+"'"+LastN+"',"+"'"+useremail+"','"+username+"','"+password+"','"+BD+"')";
+      System.out.printf(""+sqlReg);
+      
+     int x = stConn.executeUpdate(sqlReg);
+        
 
-        // Check if type is null; set it to a default value if needed
-        if (type == null) {
-            type = "default_type"; // Replace "default_type" with an appropriate default value
-        }
-        String sql = "INSERT INTO systemusers (user_email, user_password, user_type) VALUES (?, ?, ?)";
-        try (PreparedStatement stmt = conn.getConnection().prepareStatement(sql)) {
-            stmt.setString(1, useremail);
-            stmt.setString(2, userpassword);
-            stmt.setString(3, type);
-            int rowsAffected = stmt.executeUpdate();
-            if (rowsAffected > 0) {
-                logger.log(Level.INFO, "Congratulations! Your account has been successfully created.");
-            } else {
-                logger.log(Level.WARNING, "Account creation failed. No rows were affected.");
-            }
-        } catch (SQLException e) {
-            logger.log(Level.SEVERE, "An error occurred while setting user data.", e);
-        }
-    }
+}
 }
