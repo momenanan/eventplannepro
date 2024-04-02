@@ -40,7 +40,7 @@ private int eventFkAfterCreation;
 private static final Logger logger = Logger.getLogger(Application.class.getName());
 private static final String DBURL = "jdbc:postgresql://localhost:5432/postgres";
 private static final String POSTGRESDBNAME = "postgres";
-private static final String PASSWORDDB="";
+private static final String passwordDB=System.getenv("VAR");
 	private static final String SELECTALLFROMVENUE = "select * from venue";
 	private static final String SELECTALLFROMEVENT = "select * from event";
 	private static final String SELECTALLFROMCELENDER = "select * from celender";
@@ -85,7 +85,6 @@ public boolean doesVenueAv(int vNumber){
 	
 	String url = DBURL;
 	String userDB =POSTGRESDBNAME;
-	String passwordDB=System.getenv(PASSWORDDB);
 	  
 	  String stVenue = SELECTALLFROMVENUE;
 	  
@@ -139,7 +138,6 @@ public boolean doesVenueTime(int vNumber,String d,int startAt,int endAt) {
 	
 	String url = DBURL;
 	String userDB =POSTGRESDBNAME;
-	String passwordDB=PASSWORDDB;
     String stEvent = SELECTALLFROMEVENT;
  
     String stCalender = SELECTALLFROMCELENDER;
@@ -217,7 +215,6 @@ public boolean doesVenueCapasity(int vNumber,int guistNumber){
 	
 	String url = DBURL;
 	String userDB =POSTGRESDBNAME;
-	String passwordDB=PASSWORDDB;
     String stVenue = SELECTALLFROMVENUE;
  
    
@@ -261,7 +258,6 @@ public void getListOffer()
 	
 	String url = DBURL;
 	String userDB =POSTGRESDBNAME;
-	String passwordDB=PASSWORDDB;
     String stOffer = SELECTALLFROMOFFER;
  
     
@@ -307,7 +303,6 @@ public int numberColumnAfterFilter(int minPrice,int maxPrice) {
 	
 	String url = DBURL;
 	String userDB =POSTGRESDBNAME;
-	String passwordDB=PASSWORDDB;
     String stOffer = "select count(feesofoffer) from offer where feesofoffer between "+minPrice+"and "+maxPrice;
  
 	Connection conOffer;
@@ -330,7 +325,6 @@ public ArrayList<Integer> filter_price_offer(int minPrice,int maxPrice){
 	
 	String url = DBURL;
 	String userDB =POSTGRESDBNAME;
-	String passwordDB=PASSWORDDB;
     String stOffer = SELECTALLFROMOFFER;
  
 	 ArrayList <Integer> a = new ArrayList<Integer>();	
@@ -372,7 +366,6 @@ public ArrayList<Integer> filter_price_venue(int minPrice,int maxPrice){
 	
 	String url = DBURL;
 	String userDB =POSTGRESDBNAME;
-	String passwordDB=PASSWORDDB;
     String stVenue = SELECTALLFROMVENUE;
  
     
@@ -429,7 +422,6 @@ return isChoosePass;
 public boolean chooseOffer(int oNumber){
 	String url = DBURL;
 	String userDB =POSTGRESDBNAME;
-	String passwordDB=PASSWORDDB;
     String stOffer = SELECTALLFROMOFFER;
  
     
@@ -465,7 +457,6 @@ public boolean getSearchVendor(int nVendor){
 	
 	String url = DBURL;
 	String userDB =POSTGRESDBNAME;
-	String passwordDB=PASSWORDDB;
     String stOffer = SELECTALLFROMOFFER;
  
     
@@ -500,7 +491,6 @@ if(ret= doesVenueCapasity(vID,cap)&&doesVenueTime(vID,d,startHourFromUser,endHou
 
 	   String url = DBURL;
 	   String userDB =POSTGRESDBNAME;
-	   String passwordDB=PASSWORDDB;
 	   
 	 logger.log(Level.INFO,"Choose one of Them as offer you want: \n");	   
 	  getListOffer();
@@ -565,7 +555,6 @@ public boolean setCalender(String d,int s,int e,boolean isA,int indexEventRow)
 	
 	   String url = DBURL;
 	   String userDB =POSTGRESDBNAME;
-	   String passwordDB=PASSWORDDB;
 	
 	   Connection conCalender;
 	  		
