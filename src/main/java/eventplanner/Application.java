@@ -116,13 +116,7 @@ public boolean doesVenueAv(int vNumber){
 				return false;
 				
 			}
-			finally
-			{
-				
-        
-     
-      
-		}
+			
 
 	
 }
