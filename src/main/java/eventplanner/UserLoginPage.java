@@ -66,8 +66,8 @@ protected boolean loginFlag;
 		   
 	        if(s1.equals(userEmail)&&s2.equals(userPassword)) {
 
-	System.out.printf("s1: "+s1+"\n");
- System.out.printf("s2: "+s2+"\n");
+	LOGGER.info(String.format("s1: %s%n", s1));
+        LOGGER.info(String.format("s2: %s%n", s2));
 	 		     
 		    	
 					this.adminIsLogin=false;
