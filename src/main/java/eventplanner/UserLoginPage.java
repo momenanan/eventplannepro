@@ -129,45 +129,45 @@ protected boolean loginFlag;
 		return this.loginFlag;
 	}
 	
-	public boolean Logout() 
+	public boolean logOut() 
 	{
 		this.loginFlag=false;
 		return this.loginFlag;
 	}
 	
-	public boolean is_Admin_logged()
+	public boolean isAdminLogged()
 	{
 	  return this.adminIsLogin;	
 	}
 	
-	public boolean is_User_logged()
+	public boolean isUserLogged()
 	{
 		return this.userIsLogin;
 	}
 	
-	public boolean is_survise_logged()
+	public boolean isSurviseLogged()
 	{
 		return this.surviseIsLogin;
 	}
 	
-	public boolean Admin_logout()
+	public boolean adminLogout()
 	{
 		this.adminIsLogin=false;
 		return this.adminIsLogin;
 	}
 	
-	public boolean user_logout()
+	public boolean userLogout()
 	{
 		this.userIsLogin=false;
 		return this.userIsLogin;
 	}
 	
-	public boolean survise_logout()
+	public boolean surviseLogout()
 	{
 		this.surviseIsLogin=false;
 		return this.surviseIsLogin;
 	}
-    public String getUser_email() {
+    public String getUserEmail() {
         return this.userEmail;
     }
 
@@ -177,7 +177,7 @@ protected boolean loginFlag;
     	
     }
  
-    public boolean getIfUserLogIn(){
+    public boolean getIfuserLogIn(){
     	return userLoginPass;
     }
 }
