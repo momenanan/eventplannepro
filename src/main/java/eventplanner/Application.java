@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 
-public class Application  throws SQLException {
+public class Application   {
 
 private User u;
 
