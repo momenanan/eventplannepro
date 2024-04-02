@@ -88,14 +88,14 @@ public class Main {
             
             // Print date and events
 		        String output = String.format("| %-11s| %-42s|%n", formattedDate, eventString.isEmpty() ? "No events" : eventString);
-		        LOGGER.info(output);
+		        logger.log(Level.INFO,output);
             
             // Move to the next day
             startDate = startDate.plusDays(1);
         }
 
         // Print calendar footer
-  LOGGER.info(SEPARATOR_LINE);
+  logger.log(Level.INFO,SEPARATOR_LINE);
     }
 
     public void createTask(LocalDate date, String time, String description) {
@@ -147,49 +147,49 @@ public class Main {
 
     public static void main(String[] args) {
         
-    	LOGGER.info("Welcome In Event Planner System \n   " +
+    	logger.log(Level.INFO,"Welcome In Event Planner System \n   " +
                 " Plases Choose Role : \n" +
                 "1- Admin \n" +
                 "2- User \n" +
                 "3- Service Provider \n");
 
-        LOGGER.info("Enter Number 1/2/3 \n");
+        logger.log(Level.INFO,"Enter Number 1/2/3 \n");
         Scanner s = new Scanner(System.in);
        int choose = s.nextInt();
-   System.out.printf("your choose is: "+Choose+"\n");
+   logger.log(Level.INFO,"your choose is: "+choose+"\n");
         if(choose == 1){
-            System.out.println("Welcome In Admin Page" +
+            logger.log(Level.INFO,"Welcome In Admin Page" +
                     " Plases Choose Page : \n" +
                     "1-SignIn/Register \n" +
                     "2-SignUP/Login \n");
 
-            System.out.println("Enter Number 1/2 \n");
+           logger.log(Level.INFO,"Enter Number 1/2 \n");
             Scanner p = new Scanner(System.in);
-            int ChoosePage = p.findInLine(".").charAt(0);
+            int choosePage = p.findInLine(".").charAt(0);
 
-            if(ChoosePage==1){
+            if(choosePage==1){
 
         
             	
-         	   System.out.printf("Enter FirstName Admin: \n");
+         	   logger.log(Level.INFO,"Enter FirstName Admin: \n");
         	   String FN = p.nextLine(); 
         	   
-        	   System.out.printf("Enter SecName Admin: \n");
+        	   logger.log(Level.INFO,"Enter SecName Admin: \n");
         	   String SN = p.nextLine(); 
         	  
-        	   System.out.printf("Enter LasttName Admin: \n");
+        	   logger.log(Level.INFO,"Enter LasttName Admin: \n");
         	   String LN = p.nextLine(); 
         	  
-        	   System.out.printf("Enter email  Admin :\n");
+        	   logger.log(Level.INFO,"Enter email  Admin :\n");
         	   String Eamail = p.nextLine(); 
         	   
-        	   System.out.printf("Enter UserName Admin \n");
+        	   logger.log(Level.INFO,"Enter UserName Admin \n");
         	   String userName = p.nextLine(); 
         	   
-        	   System.out.printf("Enter password Admin \n");
+        	   logger.log(Level.INFO,"Enter password Admin \n");
         	   String password = p.nextLine(); 
         	   
-        	   System.out.printf("Enter Date: \n");
+        	   logger.log(Level.INFO,"Enter Date: \n");
         	   String DateOfUser = p.nextLine();         	   
         	   
 			try {
@@ -201,7 +201,7 @@ public class Main {
           	  // Register Page
             }
 
-            if(ChoosePage==2){
+            if(choosePage==2){
         
 
             	
@@ -214,37 +214,37 @@ public class Main {
         }
         //////////////////////////////////Now User
         
-        if(Choose == 2){
-            System.out.println("Welcome In User Page" +
+        if(choose == 2){
+            logger.log(Level.INFO,"Welcome In User Page" +
                     " Plases Choose Page : \n" +
                     "1- SignIn/Register \n" +
                     "2- SignUP/Login \n");
 
 
-            System.out.println("Enter Number 1/2 in user page \n");
+            logger.log(Level.INFO,"Enter Number 1/2 in user page \n");
             Scanner p = new Scanner(System.in);
             //int ChoosePage = p.findInLine(".").charAt(0);
-          int ChoosePage = p.nextInt();
-            System.out.printf("chose page is "+ ChoosePage+"\n");
-            if(ChoosePage==1){
+          int choosePage = p.nextInt();
+            logger.log(Level.INFO,"chose page is "+ choosePage+"\n");
+            if(choosePage==1){
             	
            try {
-        	   System.out.printf("Enter FirstName: \n");
+        	  logger.log(Level.INFO,"Enter FirstName: \n");
         	   String FN = p.nextLine(); 
         	   
-        	   System.out.printf("Enter SecName: \n");
+        	   logger.log(Level.INFO,"Enter SecName: \n");
         	   String SN = p.nextLine(); 
         	  
-        	   System.out.printf("Enter LasttName: \n");
+        	   logger.log(Level.INFO,"Enter LasttName: \n");
         	   String LN = p.nextLine(); 
         	  
-        	   System.out.printf("Enter email: \n");
+        	  logger.log(Level.INFO,"Enter email: \n");
         	   String Eamail = p.nextLine(); 
         	   
-        	   System.out.printf("Enter UserName: \n");
+        	   logger.log(Level.INFO,"Enter UserName: \n");
         	   String userName = p.nextLine(); 
         	   
-        	   System.out.printf("Enter password: \n");
+        	   logger.log(Level.INFO,"Enter password: \n");
         	   String password = p.nextLine(); 
         	   
         	   System.out.printf("Enter Date: \n");
@@ -261,7 +261,7 @@ public class Main {
           	  // Register Page
             }
 
-            if(ChoosePage==2){
+            if(choosePage==2){
           	  // Login Page
       System.out.printf("helo log in user: \n");           
                  
@@ -383,7 +383,7 @@ public class Main {
 
         
         
-        if(Choose == 3){
+        if(choose == 3){
             System.out.println("Welcome In Service Provider Page" +
                     " Plases Choose Page : \n" +
                     "1- SignIn/Register \n" +
