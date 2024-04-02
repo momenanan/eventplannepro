@@ -172,16 +172,16 @@ public class Main {
         
             	
          	   logger.log(Level.INFO,"Enter FirstName Admin: \n");
-        	   String FN = p.nextLine(); 
+        	   String fn = p.nextLine(); 
         	   
         	   logger.log(Level.INFO,"Enter SecName Admin: \n");
-        	   String SN = p.nextLine(); 
+        	   String sn = p.nextLine(); 
         	  
         	   logger.log(Level.INFO,"Enter LasttName Admin: \n");
-        	   String LN = p.nextLine(); 
+        	   String ln = p.nextLine(); 
         	  
         	   logger.log(Level.INFO,"Enter email  Admin :\n");
-        	   String Eamail = p.nextLine(); 
+        	   String email = p.nextLine(); 
         	   
         	   logger.log(Level.INFO,"Enter UserName Admin \n");
         	   String userName = p.nextLine(); 
@@ -190,12 +190,11 @@ public class Main {
         	   String password = p.nextLine(); 
         	   
         	   logger.log(Level.INFO,"Enter Date: \n");
-        	   String DateOfUser = p.nextLine();         	   
+        	   String dateOfUser = p.nextLine();         	   
         	   
 			try {
-				registration.setData(FN,SN,LN,Eamail,userName,password,DateOfUser,"admin");
+				registration.setData(fn,sn,ln,email,userName,password,dateOfUser,"admin");
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
           	  // Register Page
@@ -223,23 +222,22 @@ public class Main {
 
             logger.log(Level.INFO,"Enter Number 1/2 in user page \n");
             Scanner p = new Scanner(System.in);
-            //int ChoosePage = p.findInLine(".").charAt(0);
           int choosePage = p.nextInt();
             logger.log(Level.INFO,"chose page is "+ choosePage+"\n");
             if(choosePage==1){
             	
            try {
         	  logger.log(Level.INFO,"Enter FirstName: \n");
-        	   String FN = p.nextLine(); 
+        	   String fn = p.nextLine(); 
         	   
         	   logger.log(Level.INFO,"Enter SecName: \n");
-        	   String SN = p.nextLine(); 
+        	   String sn = p.nextLine(); 
         	  
         	   logger.log(Level.INFO,"Enter LasttName: \n");
-        	   String LN = p.nextLine(); 
+        	   String ln = p.nextLine(); 
         	  
         	  logger.log(Level.INFO,"Enter email: \n");
-        	   String Eamail = p.nextLine(); 
+        	   String email = p.nextLine(); 
         	   
         	   logger.log(Level.INFO,"Enter UserName: \n");
         	   String userName = p.nextLine(); 
@@ -248,13 +246,12 @@ public class Main {
         	   String password = p.nextLine(); 
         	   
         	   logger.log(Level.INFO,"Enter Date: \n");
-        	   String DateOfUser = p.nextLine();         	   
+        	   String dateOfUser = p.nextLine();         	   
         	   
-			registration.setData(FN,SN,LN,Eamail,userName,password,DateOfUser,"users");
+			registration.setData(fn,sn,ln,email,userName,password,dateOfUser,"users");
 		
            
            } catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 		
             	
@@ -263,22 +260,22 @@ public class Main {
 
             if(choosePage==2){
           	  // Login Page
-      System.out.printf("helo log in user: \n");           
+      logger.log(Level.INFO,"helo log in user: \n");           
                  
           	  logger.log(Level.INFO,"please enter UserName:+\n");              
-                 Scanner ScannerUserName = new Scanner(System.in);
-                 String LineUserName=ScannerUserName.nextLine();
-                logger.log(Level.INFO,"userName you enter is : "+LineUserName+"\n"); 
+                 Scanner scannerUserName = new Scanner(System.in);
+                 String lineUserName=scannerUserName.nextLine();
+                logger.log(Level.INFO,"userName you enter is : "+lineUserName+"\n"); 
                      
                  logger.log(Level.INFO,"please enter password:+\n");              
-                 Scanner ScannerPassword = new Scanner(System.in);
-                 String LinePassword=ScannerUserName.nextLine();
-                logger.log(Level.INFO,"your password enter is :"+ LinePassword+"\n"); 
+                 Scanner scannerPassword = new Scanner(System.in);
+                 String linePassword=scannerUserName.nextLine();
+                logger.log(Level.INFO,"your password enter is :"+ linePassword+"\n"); 
         
                 try {	
                 	
                 	boolean t;
-                    if(t = (logInPage. isValidCredentials(LineUserName,LinePassword,"users")))
+                    if(t = (logInPage. isValidCredentials(lineUserName,linePassword,"users")))
                     {
                     	int userID=logInPage.getUID();
 //                    	t = (logInPage.is_valid_credentials(LineUserName,LinePassword,"users"))
@@ -338,9 +335,9 @@ public class Main {
                   logger.log(Level.INFO,"enter The Number of guist:\n");	
                          int g1=chooseFromLogIn.nextInt(); 
                    logger.log(Level.INFO,"enter year:\n");	
-                  Main m = new Main();       
-                  Apps Ap1=new Apps();
-                  Ap1.viewCalendar();
+                  Main mainn = new Main();       
+                  Apps app=new Apps();
+                  app.viewCalendar();
                   logger.log(Level.INFO,"These wich are  time you can't booking:\n"); 
                   int y = chooseFromLogIn.nextInt(); 
                   logger.log(Level.INFO,"Enter month please:\n");
@@ -348,7 +345,7 @@ public class Main {
                   logger.log(Level.INFO,"Enter Day please\n");
                    int d1 = chooseFromLogIn.nextInt();
                    
-                   String Da = y+"-"+m1+"-"+d1;
+                   String da = y+"-"+m1+"-"+d1;
                    
                    //////////////////////
                          logger.log(Level.INFO,"enter hour to start event:\n");
@@ -360,7 +357,7 @@ public class Main {
                    String a1 = chooseFromLogIn.nextLine();
                    
                    ////////////////////////    
-                   a.Go_book(v1,g1,Da,s1,e1,a1,userID);                    	
+                   a.Go_book(v1,g1,da,s1,e1,a1,userID);                    	
                    
                       }                    	
                     }else
@@ -373,7 +370,6 @@ public class Main {
                                            	
                 
                 } catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
                 
@@ -392,14 +388,14 @@ public class Main {
 
             logger.log(Level.INFO,"Enter Number 1/2 \n");
             Scanner p = new Scanner(System.in);
-            int ChoosePage = p.findInLine(".").charAt(0);
+            int choosePage = p.findInLine(".").charAt(0);
 
 
-            if(ChoosePage==1){
+            if(choosePage==1){
                 // Register Page
             }
 
-            if(ChoosePage==2){
+            if(choosePage==2){
                 // Login Page
             }
         
