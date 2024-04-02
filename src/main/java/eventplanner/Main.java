@@ -247,7 +247,7 @@ public class Main {
         	   logger.log(Level.INFO,"Enter password: \n");
         	   String password = p.nextLine(); 
         	   
-        	   System.out.printf("Enter Date: \n");
+        	   logger.log(Level.INFO,"Enter Date: \n");
         	   String DateOfUser = p.nextLine();         	   
         	   
 			registration.setData(FN,SN,LN,Eamail,userName,password,DateOfUser,"users");
@@ -265,15 +265,15 @@ public class Main {
           	  // Login Page
       System.out.printf("helo log in user: \n");           
                  
-          	  System.out.printf("please enter UserName:+\n");              
+          	  logger.log(Level.INFO,"please enter UserName:+\n");              
                  Scanner ScannerUserName = new Scanner(System.in);
                  String LineUserName=ScannerUserName.nextLine();
-                 System.out.printf("userName you enter is : "+LineUserName+"\n"); 
+                logger.log(Level.INFO,"userName you enter is : "+LineUserName+"\n"); 
                      
-                 System.out.printf("please enter password:+\n");              
+                 logger.log(Level.INFO,"please enter password:+\n");              
                  Scanner ScannerPassword = new Scanner(System.in);
                  String LinePassword=ScannerUserName.nextLine();
-                System.out.printf("your password enter is :"+ LinePassword+"\n"); 
+                logger.log(Level.INFO,"your password enter is :"+ LinePassword+"\n"); 
         
                 try {	
                 	
@@ -282,26 +282,26 @@ public class Main {
                     {
                     	int userID=logInPage.getUID();
 //                    	t = (logInPage.is_valid_credentials(LineUserName,LinePassword,"users"))
-                    	System.out.printf("log in flag: "+t);
-                    	System.out.printf("Please choose on of these operation: \n");
+                    	logger.log(Level.INFO,"log in flag: "+t);
+                    	logger.log(Level.INFO,"Please choose on of these operation: \n");
                       Scanner chooseFromLogIn=new Scanner(System.in);
                       
-                      System.out.printf("1- create Event:- "+"\n");
+                      logger.log(Level.INFO,"1- create Event:- "+"\n");
  
                       int x = chooseFromLogIn.nextInt();
                       if(x == 1){
                     	 Application a = new Application();
                                          
-                    	 System.out.printf("if you want to filter venue press f \n");
+                    	 logger.log(Level.INFO,"if you want to filter venue press f \n");
                     	 Scanner ch=new Scanner(System.in);
                     	 String fa = ch.nextLine();
                     	 
                     	
                     	 if(fa.equals("f")) {
-                    		 System.out.printf("Enter min price:\n");
+                    		logger.log(Level.INFO,"Enter min price:\n");
                     		 int min1 = chooseFromLogIn.nextInt();
                     		 
-                    		 System.out.printf("Enter max price:\n");
+                    		 logger.log(Level.INFO,"Enter max price:\n");
                     		 int max1 = chooseFromLogIn.nextInt();
                     		 
                     		 a.filter_price_venue(min1, max1);
@@ -310,14 +310,14 @@ public class Main {
                     	 }
                    //////////////////////////////////
                     	 
-                    	 System.out.printf("if you want to filter offer press f \n");
+                    	 logger.log(Level.INFO,"if you want to filter offer press f \n");
                     	 String fa2 = ch.nextLine();
                               	 
                     	 if(fa2.equals("f")) {
-                    		 System.out.printf("Enter min price:\n");
+                    		 logger.log(Level.INFO,"Enter min price:\n");
                     		 int min1 = chooseFromLogIn.nextInt();
                     		 
-                    		 System.out.printf("Enter max price:\n");
+                    		 logger.log(Level.INFO,"Enter max price:\n");
                     		 int max1 = chooseFromLogIn.nextInt();
                     		 
                     		 a.filter_price_offer(min1, max1);
@@ -333,30 +333,30 @@ public class Main {
                     	 
                     	 
                   /////////////////////////////////////  	 
-                   System.out.printf("enter The venue you want:\n");	
+                   logger.log(Level.INFO,"enter The venue you want:\n");	
                          int v1= chooseFromLogIn.nextInt();
-                   System.out.printf("enter The Number of guist:\n");	
+                  logger.log(Level.INFO,"enter The Number of guist:\n");	
                          int g1=chooseFromLogIn.nextInt(); 
-                   System.out.printf("enter year:\n");	
+                   logger.log(Level.INFO,"enter year:\n");	
                   Main m = new Main();       
                   Apps Ap1=new Apps();
                   Ap1.viewCalendar();
-                  System.out.printf("These wich are  time you can't booking:\n"); 
+                  logger.log(Level.INFO,"These wich are  time you can't booking:\n"); 
                   int y = chooseFromLogIn.nextInt(); 
-                  System.out.printf("Enter month please:\n");
+                  logger.log(Level.INFO,"Enter month please:\n");
                   int m1 = chooseFromLogIn.nextInt();               
-                  System.out.printf("Enter Day please\n");
+                  logger.log(Level.INFO,"Enter Day please\n");
                    int d1 = chooseFromLogIn.nextInt();
                    
                    String Da = y+"-"+m1+"-"+d1;
                    
                    //////////////////////
-                         System.out.printf("enter hour to start event:\n");
+                         logger.log(Level.INFO,"enter hour to start event:\n");
                          int s1 = chooseFromLogIn.nextInt(); 
-                         System.out.printf("enter hour to end event:\n");
+                         logger.log(Level.INFO,"enter hour to end event:\n");
                          int e1 = chooseFromLogIn.nextInt();
                          ///////////////////
-                   System.out.printf("enter amenetis:\n");
+                   logger.log(Level.INFO,"enter amenetis:\n");
                    String a1 = chooseFromLogIn.nextLine();
                    
                    ////////////////////////    
@@ -366,7 +366,7 @@ public class Main {
                     }else
                     {
         
-                    	System.out.printf("Sorry Log In faild");
+                    	logger.log(Level.INFO,"Sorry Log In faild");
                     }
                     
 			 	    
@@ -384,13 +384,13 @@ public class Main {
         
         
         if(choose == 3){
-            System.out.println("Welcome In Service Provider Page" +
+            logger.log(Level.INFO,"Welcome In Service Provider Page" +
                     " Plases Choose Page : \n" +
                     "1- SignIn/Register \n" +
                     "2- SignUP/Login \n");
 
 
-            System.out.println("Enter Number 1/2 \n");
+            logger.log(Level.INFO,"Enter Number 1/2 \n");
             Scanner p = new Scanner(System.in);
             int ChoosePage = p.findInLine(".").charAt(0);
 
@@ -403,8 +403,8 @@ public class Main {
                 // Login Page
             }
         
-            System.out.println("Wasan awwade" );
-            System.out.println("Wasan awwade" );
+            logger.log(Level.INFO,"Wasan awwade" );
+            logger.log(Level.INFO,"Wasan awwade" );
         
         }
 
