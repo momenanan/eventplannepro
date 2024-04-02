@@ -102,6 +102,8 @@ public boolean doesVenueAv(int vNumber){
                locationVenueCla=rsVenue.getString(5);
 			   feesVenueCla=rsVenue.getInt(6);
                return true;
+
+						
 					}		
 					
 				}
