@@ -1,28 +1,33 @@
 package eventplanner;
-import java.sql.SQLException;
-import java.sql.Statement;
-import javax.swing.JOptionPane;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 public class UserLoginPage {
-    private String WhoLastLogIn;
-    private boolean UserLogInPass;
-	protected boolean Admin_is_login; // declaring the flag to chekck id the admin id login to the system or not
-	protected boolean user_is_login; 
-	protected boolean sutvise_is_login;
+    private String whoLastLogin;
+    private boolean userLoginPass;
+
+        protected boolean AdminIsLogin; 
+	protected boolean UserIsLogin; 
+	protected boolean SurviseIsLogin;
 	
-	protected boolean login_flag;
-	
-	protected String type_admin="admin";
-	protected String type_user="users";
-	protected String type_sutvise="survise";
-	
-	protected String user_email;
-	protected String user_password;
-	private int UserIDFromDB;
-	public int getUID() {
-		return UserIDFromDB;
-	}
+	protected boolean LoginFlag;	
+    
+    private String typeAdmin = "admin";
+    private String typeUser = "user";
+    private String typeSupervisor = "supervisor";
+    
+    private String userEmail;
+    private String userPassword;
+    private int userIDFromDB;
+
+       
+
+    public int getUserId() {
+        return userIDFromDB;
+    }
 	public UserLoginPage() // initilazation for this calss
 	{
 		Admin_is_login=false;
