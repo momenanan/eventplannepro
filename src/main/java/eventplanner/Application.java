@@ -275,7 +275,7 @@ public void getListOffer()
 	        int spFk = rsOffer.getInt(5);
 	        int feesOffer = rsOffer.getInt(6);
 	   
-	        logger.log(Level.INFO,"offer_id: "+oId+"    ser_Type : "+serType+"    serP_name : "+serPName+"    ser_Av :"+serAv+"    sp_fk: "+spFk+"    fees: "+feesOffer+"\n");
+logger.log(Level.INFO, String.format("offer_id: %s    ser_Type : %s    serP_name : %s    ser_Av : %s    sp_fk: %s    fees: %s\n", oId, serType, serPName, serAv, spFk, feesOffer));
 	        
       				}
 			} catch (SQLException e) {
