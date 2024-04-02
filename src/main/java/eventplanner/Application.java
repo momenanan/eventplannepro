@@ -13,6 +13,9 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.JOptionPane;
 
 public class Application {
@@ -22,81 +25,81 @@ private User u;
 /////////////////////////////////////
 private boolean flag;
 
-private String WhoLogIn;
-private boolean is_venue_av;
-private boolean is_venue_cap;
-private boolean is_venue_time=true;
-private boolean is_overlap;
-private boolean is_filter_offer;
-private boolean is_offer_av;
-private boolean is_choose_pass;
-private boolean is_search_pass;
-private boolean is_filter_venue;
+private String whoLogIn;
+private boolean isVenueAv;
+private boolean isVenueCap;
+private boolean isVenueTime=true;
+private boolean isOverlap;
+private boolean isFilterOffer;
+private boolean isOfferAv;
+private boolean isChoosePass;
+private boolean isSearchPass;
+private boolean isFilterVenue;
 ////////////////////////////////////
-private String Location_venue_cla;
-private int  fees_venue_cla;
-private int SP_fk_cla;
-private int event_fk_after_creation;
+private String locationVenueCla;
+private int  feesVenueCla;
+private int sPFkCla;
+private int eventFkAfterCreation;
+private static final Logger logger = Logger.getLogger(Application.class.getName());
 
 
-public boolean get_is_venue_av(){
-return is_venue_av;		
+
+public boolean getIsVenueAv(){
+return isVenueAv;		
 }
 
-public boolean get_is_venue_cap() {
-return is_venue_cap;	
+public boolean getIsVenueCap() {
+return isVenueCap;	
 }
 
-public void SetWhoLogIn(String t){	
-	WhoLogIn=t;
+public void setWhoLogIn(String t){	
+	whoLogIn=t;
 }
 
 public boolean getWhoLogIn(){
-	return WhoLogIn.equals("users");	
+	return whoLogIn.equals("users");	
 }
 
-public boolean get_is_venue_time(){
-	return is_venue_time;	
+public boolean getIsVenueTime(){
+	return isVenueTime;	
 }
 
-public boolean is_book_venue_pass(boolean av1,boolean t1,boolean cap1){		
+public boolean isBookVenuePass(boolean av1,boolean t1,boolean cap1){		
 		return av1&&t1&&cap1; 
 }
 
 
 
-public boolean Does_venue_av(int v_number){
+public boolean doesVenueAv(int vNumber){
 
 	
 	String url = "jdbc:postgresql://localhost:5432/postgres";
 	String userDB ="postgres";
 	String passwordDB="12345";
 	  
-	  String st_venue = "select * from venue";
+	  String stVenue = "select * from venue";
 		try {
 			Connection con_venue=DriverManager.getConnection(url,userDB,passwordDB);;	 
 			Statement statement_venue=con_venue.createStatement();				
-			ResultSet rs_venue = statement_venue.executeQuery(st_venue);
+			ResultSet rs_venue = statement_venue.executeQuery(stVenue);
 			
 			while(rs_venue.next()){
-				if(rs_venue.getString(1).equals(Integer.toString(v_number)))
+				if(rs_venue.getString(1).equals(Integer.toString(vNumber)))
 				{					
        
-					if(is_venue_av=rs_venue.getBoolean(2)){     
+					if(isVenueAv=rs_venue.getBoolean(2)){     
 						
-               Location_venue_cla=rs_venue.getString(5);
-			   fees_venue_cla=rs_venue.getInt(6);
+               locationVenueCla=rs_venue.getString(5);
+			   feesVenueCla=rs_venue.getInt(6);
                return true;
 					}		
 					
 				}
 				
 			}
-//JOptionPane.showMessageDialog(null,"sorry we could not find this venue");
 			return false;
 	
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
       return false;
 		}
@@ -104,21 +107,20 @@ public boolean Does_venue_av(int v_number){
 	
 }
 
-public boolean time_realistic(int start_at,int end_at){
+public boolean timeRealistic(int startAt,int endAt){
 	
-	return start_at<end_at;
+	return startAt<endAt;
 	
 }
-public boolean same_venue(int x_fromDB,int v_fromUser){
+public boolean sameVenue(int xFromDb,int vFromUser){
 
-	return x_fromDB == v_fromUser;	
+	return xFromDb == vFromUser;	
 }
-public boolean not_valid_time(int start_at,int end_at,int cStart,int cEnd){	
-	//return false;
-return((end_at<=cEnd)&&(cStart<end_at))||(cStart<=start_at)&&(cEnd>start_at)||(cEnd<=end_at)&&(cStart>=start_at);
+public boolean notValidTime(int startAt,int endAt,int cStart,int cEnd){	
+return((endAt<=cEnd)&&(cStart<endAt))||(cStart<=startAt)&&(cEnd>startAt)||(cEnd<=endAt)&&(cStart>=startAt);
 }
 
-public boolean Does_venue_time(int v_number,String d,int start_at,int end_at){
+public boolean doesVenueTime(int vNumber,String d,int startAt,int endAt){
 	
 	
 	String url = "jdbc:postgresql://localhost:5432/postgres";
@@ -148,21 +150,21 @@ public boolean Does_venue_time(int v_number,String d,int start_at,int end_at){
 				int xEventIx=rs_event.getInt(1);
 				
 				
-				if(same_venue(x1,v_number)) {
+				if(sameVenue(x1,vNumber)) {
 				
 					
 					while(rs_calender.next()){
 
 						String sDateCalender=rs_calender.getString(2);	
 									
-						System.out.printf("  vN: "+v_number);
-						System.out.printf("    d: "+d+"  and in cal : "+sDateCalender);
-						System.out.printf("     start_at: "+start_at);
-						System.out.printf("       end_at: "+end_at);
+						logger.log(Level.INFO,"  vN: "+vNumber);
+						logger.log(Level.INFO,"    d: "+d+"  and in cal : "+sDateCalender);
+						logger.log(Level.INFO,"     start_at: "+startAt);
+						logger.log(Level.INFO,"       end_at: "+endAt);
 			
 						if(rs_calender.getInt(5)==xEventIx){
 			
-								if(time_realistic(start_at,end_at)&&(sDateCalender.equals(d))){
+								if(timeRealistic(startAt,endAt)&&(sDateCalender.equals(d))){
 									
 									
 									String sStartCalender=rs_calender.getString(3);	
@@ -174,10 +176,9 @@ public boolean Does_venue_time(int v_number,String d,int start_at,int end_at){
 								    	int cEnd=Integer.parseInt(s41);
 							
 								    	
-										//IntRang interval = new IntRang(cStart,cEnd);
 									
-									if(not_valid_time(start_at,end_at,cStart,cEnd)){
-										is_venue_time=false;
+									if(notValidTime(startAt,endAt,cStart,cEnd)){
+										isVenueTime=false;
 										return false;
 	                           	}
 								
@@ -191,7 +192,6 @@ public boolean Does_venue_time(int v_number,String d,int start_at,int end_at){
 			return true;
 	
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
       return false;
 		}
@@ -199,28 +199,27 @@ public boolean Does_venue_time(int v_number,String d,int start_at,int end_at){
 	
 }
 
-public boolean Does_venue_capasity(int v_number,int guist_number){
+public boolean doesVenueCapasity(int vNumber,int guistNumber){
 	
 	String url = "jdbc:postgresql://localhost:5432/postgres";
 	String userDB ="postgres";
 	String passwordDB="12345";
-    String st_venue = "select * from venue";
+    String stVenue = "select * from venue";
  
    
 			try {
 				
 				Connection con_venue=DriverManager.getConnection(url,userDB,passwordDB);;	 
 				Statement statement_venue=con_venue.createStatement();					
-				ResultSet rs_venue = statement_venue.executeQuery(st_venue);
+				ResultSet rsVenue = statement_venue.executeQuery(stVenue);
 				
 				
-				while(rs_venue.next()){
+				while(rsVenue.next()){
 					
-				if(rs_venue.getInt(1) == v_number){
-		//		JOptionPane.showMessageDialog(null,rs_venue.getInt(3)+"   "+guist_number);	
-					if(rs_venue.getInt(3)>guist_number){
+				if(rsVenue.getInt(1) == vNumber){
+					if(rsVenue.getInt(3)>guistNumber){
 				
-						is_venue_cap = true;
+						isVenueCap = true;
 						
 						return true;
 					}
@@ -232,7 +231,6 @@ public boolean Does_venue_capasity(int v_number,int guist_number){
       				}
 				return false;			
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return false;
 				
@@ -244,117 +242,114 @@ public boolean Does_venue_capasity(int v_number,int guist_number){
 
 /////////////////////////////////////////////////////////////////////
 
-public void get_List_offer()
+public void getListOffer()
 {
 
 	
 	String url = "jdbc:postgresql://localhost:5432/postgres";
 	String userDB ="postgres";
 	String passwordDB="12345";
-    String st_offer = "select * from offer";
+    String stOffer = "select * from offer";
  
     
    			try {
 				
 				Connection con_offer=DriverManager.getConnection(url,userDB,passwordDB);;	 
 				Statement statement_offer=con_offer.createStatement();					
-				ResultSet rs_offer = statement_offer.executeQuery(st_offer);
+				ResultSet rsOffer = statement_offer.executeQuery(stOffer);
 				
 		    
-				while(rs_offer.next()){
+				while(rsOffer.next()){
 			
-			int o_id = rs_offer.getInt(1);		
-			String ser_Type = rs_offer.getString(2);	
-	        String serP_name = rs_offer.getString(3);
-	        boolean ser_Av = rs_offer.getBoolean(4);
-	        int sp_fk = rs_offer.getInt(5);
-	        int fees_offer = rs_offer.getInt(6);
+			int oId = rsOffer.getInt(1);		
+			String serType = rsOffer.getString(2);	
+	        String serPName = rsOffer.getString(3);
+	        boolean serAv = rsOffer.getBoolean(4);
+	        int spFk = rsOffer.getInt(5);
+	        int feesOffer = rsOffer.getInt(6);
 	   
-	        System.out.printf("offer_id: "+o_id+"    ser_Type : "+ser_Type+"    serP_name : "+serP_name+"    ser_Av :"+ser_Av+"    sp_fk: "+sp_fk+"    fees: "+fees_offer+"\n");
+	        logger.log(Level.INFO,"offer_id: "+oId+"    ser_Type : "+serType+"    serP_name : "+serPName+"    ser_Av :"+serAv+"    sp_fk: "+spFk+"    fees: "+feesOffer+"\n");
 	        
       				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}   
     
 }
 
 //////////////////////////////////////////////////////////////////////////
-public boolean is_min_max(int min_price,int max_price,int fees){
+public boolean isMinMax(int minPrice,int maxPrice,int fees){
 	
-	return min_price<=fees&& fees<=max_price;
+	return minPrice<=fees&& fees<=maxPrice;
 	
 }
 
 
-public boolean return_is_filter_offer() 
+public boolean returnIsFilterOffer() 
 {
-return is_filter_offer;
+return isFilterOffer;
 }
 
 
-public int number_column_after_filter(int min_price,int max_price) {
+public int numberColumnAfterFilter(int minPrice,int maxPrice) {
 	
 	String url = "jdbc:postgresql://localhost:5432/postgres";
 	String userDB ="postgres";
 	String passwordDB="12345";
-    String st_offer = "select count(feesofoffer) from offer where feesofoffer between "+min_price+"and "+max_price;
+    String stOffer = "select count(feesofoffer) from offer where feesofoffer between "+minPrice+"and "+maxPrice;
  
-	Connection con_offer;
+	Connection conOffer;
 	try {
-		con_offer = DriverManager.getConnection(url,userDB,passwordDB);
-		Statement statement_offer=con_offer.createStatement();					
-		int rs_offer = statement_offer.executeUpdate(st_offer);
+		conOffer = DriverManager.getConnection(url,userDB,passwordDB);
+		Statement statementOffer=conOffer.createStatement();					
+		int rsOffer = statementOffer.executeUpdate(stOffer);
 	
 		
 		
-   return rs_offer;
+   return rsOffer;
 	
 	} catch (SQLException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 		return 0;
 	}	 
 		
 }
-public ArrayList<Integer> filter_price_offer(int min_price,int max_price){
+public ArrayList<Integer> filter_price_offer(int minPrice,int maxPrice){
 	
 	String url = "jdbc:postgresql://localhost:5432/postgres";
 	String userDB ="postgres";
 	String passwordDB="12345";
-    String st_offer = "select * from offer";
+    String stOffer = "select * from offer";
  
 	 ArrayList <Integer> a = new ArrayList<Integer>();	
 			try {
 				
-				Connection con_offer=DriverManager.getConnection(url,userDB,passwordDB);;	 
-				Statement statement_offer=con_offer.createStatement();					
-				ResultSet rs_offer = statement_offer.executeQuery(st_offer);
-				int fees_offer;
+				Connection conOffer=DriverManager.getConnection(url,userDB,passwordDB);;	 
+				Statement statementOffer=conOffer.createStatement();					
+				ResultSet rsOffer = statementOffer.executeQuery(stOffer);
+				int feesOffer;
 					
-				while(rs_offer.next())
+				while(rsOffer.next())
 				 {
-			         fees_offer = rs_offer.getInt(6);	
+			         feesOffer = rsOffer.getInt(6);	
 
-			         if(is_min_max(min_price,max_price,fees_offer)) {	
+			         if(isMinMax(minPrice,maxPrice,feesOffer)) {	
 	
-			int o_id = rs_offer.getInt(1);		
+			int oId = rsOffer.getInt(1);		
 			
-			String ser_Type = rs_offer.getString(2);	
-	        String serP_name = rs_offer.getString(3);
-	        boolean ser_Av = rs_offer.getBoolean(4);
-	        int sp_fk = rs_offer.getInt(5);
-	        is_filter_offer = true;
-			a.add(fees_offer);
+			String serType = rsOffer.getString(2);	
+	        String serPName = rsOffer.getString(3);
+	        boolean serAv = rsOffer.getBoolean(4);
+	        int spFk = rsOffer.getInt(5);
+	        isFilterOffer = true;
+			a.add(feesOffer);
 			
-	        System.out.printf("offer_id : "+o_id+"    ser_Type : "+ser_Type+"    serP_name : "+serP_name+"    ser_Av : "+ser_Av+"    sp_fk : "+sp_fk+"    fees: "+fees_offer+"\n");
+	        logger.log(Level.INFO,"offer_id : "+oId+"    ser_Type : "+serType+"    serP_name : "+serPName+"    ser_Av : "+serAv+"    sp_fk : "+spFk+"    fees: "+feesOffer+"\n");
   	} 
 			         
       				}
 				return a;		        
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return a;
 			}   		
@@ -362,56 +357,48 @@ public ArrayList<Integer> filter_price_offer(int min_price,int max_price){
 /////////////////////////////////////////////////
 
 
-public ArrayList<Integer> filter_price_venue(int min_price,int max_price){
+public ArrayList<Integer> filter_price_venue(int minPrice,int maxPrice){
 	
 	String url = "jdbc:postgresql://localhost:5432/postgres";
 	String userDB ="postgres";
 	String passwordDB="12345";
-    String st_venue = "select * from venue";
+    String stVenue = "select * from venue";
  
     
 	 ArrayList <Integer> a = new ArrayList<Integer>();	
 			try {
 				
-				Connection con_venue=DriverManager.getConnection(url,userDB,passwordDB);;	 
-				Statement statement_venue=con_venue.createStatement();					
-				ResultSet rs_venue = statement_venue.executeQuery(st_venue);
-				int fees_venue;
+				Connection conVenue=DriverManager.getConnection(url,userDB,passwordDB);;	 
+				Statement statementVenue=conVenue.createStatement();					
+				ResultSet rsVenue = statementVenue.executeQuery(stVenue);
+				int feesVenue;
 					
-				while(rs_venue.next())
+				while(rsVenue.next())
 				 {
-			         fees_venue = rs_venue.getInt(6);	
+			         feesVenue = rsVenue.getInt(6);	
 
-			         if(is_min_max(min_price,max_price,fees_venue)) {	
+			         if(isMinMax(minPrice,maxPrice,feesVenue)) {	
 	
-			int v_id = rs_venue.getInt(1);		
+			int vId = rsVenue.getInt(1);		
 			
-			boolean v_av = rs_venue.getBoolean(2);	
-	        String cap = rs_venue.getString(3);
-	        String amen = rs_venue.getString(4);
-	        String location =rs_venue.getString(5);
-	        int fees = rs_venue.getInt(6);
-	        is_filter_venue = true;
-			a.add(fees_venue);
+			boolean vAv = rsVenue.getBoolean(2);	
+	        String cap = rsVenue.getString(3);
+	        String amen = rsVenue.getString(4);
+	        String location =rsVenue.getString(5);
+	        int fees = rsVenue.getInt(6);
+	        isFilterVenue = true;
+			a.add(feesVenue);
 			
-	        System.out.printf("venue_id : "+v_id+"    v_avai : "+v_av+"    cap : "+cap+"    amenities : "+amen+"    Location : "+location+"    fees: "+fees+"\n");
+	       logger.log(Level.INFO,"venue_id : "+vId+"    v_avai : "+vAv+"    cap : "+cap+"    amenities : "+amen+"    Location : "+location+"    fees: "+fees+"\n");
   	} 
 			         
       				}
 				return a;		        
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return a;
 			}   		
 }
-
-
-
-
-
-
-
 
 
 
@@ -422,37 +409,35 @@ public ArrayList<Integer> filter_price_venue(int min_price,int max_price){
 
 
 //////////////////////////////////////////////////
-public boolean return_offer_av(){
-	return is_offer_av;
+public boolean returnOfferAv(){
+	return isOfferAv;
 }
 
-public boolean get_is_choose_pass(){	
-return is_choose_pass;	
+public boolean getIsChoosePass(){	
+return isChoosePass;	
 }
-public boolean choose_offer(int o_number){
+public boolean chooseOffer(int oNumber){
 	String url = "jdbc:postgresql://localhost:5432/postgres";
 	String userDB ="postgres";
 	String passwordDB="12345";
-    String st_offer = "select * from offer";
+    String stOffer = "select * from offer";
  
     
 			try {
 				
-				Connection con_offer=DriverManager.getConnection(url,userDB,passwordDB);;	 
-				Statement statement_offer=con_offer.createStatement();					
-				ResultSet rs_offer = statement_offer.executeQuery(st_offer);
-				while(rs_offer.next()){
+				Connection conOffer=DriverManager.getConnection(url,userDB,passwordDB);;	 
+				Statement statementOffer=conOffer.createStatement();					
+				ResultSet rsOffer = statementOffer.executeQuery(stOffer);
+				while(rsOffer.next()){
 
-					if((rs_offer.getInt(1)==o_number)){
-					//	JOptionPane.showMessageDialog(null,rs_offer.getInt(1)+"---"+o_number+"---"+rs_offer.getBoolean(4));
-	            	SP_fk_cla=rs_offer.getInt(5);
-						return is_choose_pass=rs_offer.getBoolean(4);
+					if((rsOffer.getInt(1)==oNumber)){
+	            	sPFkCla=rsOffer.getInt(5);
+						return isChoosePass=rsOffer.getBoolean(4);
  					
 					}
 				}
 				return false;
 				} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return false;
 			}   		
@@ -462,36 +447,34 @@ public boolean choose_offer(int o_number){
 
 //////////////////////////////////////Vendor
 
-public boolean get_is_search_pass() 
+public boolean getIsSearchPass() 
 {
-return is_search_pass;
+return isSearchPass;
 }
-public boolean get_search_vendor(int n_vendor){
+public boolean getSearchVendor(int nVendor){
 	
 	
 	String url = "jdbc:postgresql://localhost:5432/postgres";
 	String userDB ="postgres";
 	String passwordDB="12345";
-    String st_offer = "select * from offer";
+    String stOffer = "select * from offer";
  
     
 			try {
 				
-				Connection con_offer=DriverManager.getConnection(url,userDB,passwordDB);;	 
-				Statement statement_offer=con_offer.createStatement();					
-				ResultSet rs_offer = statement_offer.executeQuery(st_offer);
-				while(rs_offer.next()){
+				Connection conOffer=DriverManager.getConnection(url,userDB,passwordDB);;	 
+				Statement statementOffer=conOffer.createStatement();					
+				ResultSet rsOffer = statementOffer.executeQuery(stOffer);
+				while(rsOffer.next()){
 
-					if(rs_offer.getInt(5) == n_vendor){
-					//JOptionPane.showMessageDialog(null,rs_offer.getInt(1)+"---"+o_number+"---"+rs_offer.getBoolean(4));
+					if(rsOffer.getInt(5) == nVendor){
 					//	SP_fk_cla =rs_offer.getInt(5);
-						return is_search_pass=rs_offer.getBoolean(4);					
+						return isSearchPass=rsOffer.getBoolean(4);					
 					}
 				}
 				
 				return false;
 				} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return false;
 			} 
@@ -499,43 +482,42 @@ public boolean get_search_vendor(int n_vendor){
 
 ////////////////////////////////////////////////////
 
-public boolean Go_book(int vID,int cap,String d,int startHourFromUser,int endHourFromUser,String amen,int uID) 
+public boolean goBook(int vID,int cap,String d,int startHourFromUser,int endHourFromUser,String amen,int uID) 
 {
 boolean ret;
-System.out.printf("1-"+Does_venue_capasity(vID,cap)+" \n");
-System.out.printf("2-"+Does_venue_time(vID,d,startHourFromUser,endHourFromUser)+"\n");
+logger.log(Level.INFO,"1-"+doesVenueCapasity(vID,cap)+" \n");
+logger.log(Level.INFO,"2-"+doesVenueTime(vID,d,startHourFromUser,endHourFromUser)+"\n");
 
-if(ret= Does_venue_capasity(vID,cap)&&Does_venue_time(vID,d,startHourFromUser,endHourFromUser)&&Does_venue_av(vID)){
+if(ret= doesVenueCapasity(vID,cap)&&doesVenueTime(vID,d,startHourFromUser,endHourFromUser)&&doesVenueAv(vID)){
 
 	   String url = "jdbc:postgresql://localhost:5432/postgres";
 	   String userDB ="postgres";
 	   String passwordDB="12345";
 	   
-	  System.out.printf("Choose one of Them as offer you want: \n");	   
-	  get_List_offer();
+	 logger.log(Level.INFO,"Choose one of Them as offer you want: \n");	   
+	  getListOffer();
 	  Scanner s = new Scanner(System.in); 
-	   int o_id=s.nextInt();
-	   boolean choose_pass=choose_offer(o_id);
+	   int oId=s.nextInt();
+	   boolean choosePass=chooseOffer(oId);
 	
-	   if(!choose_pass) {
-		   System.out.printf("Sorry this offer not availabe \n");
+	   if(!choosePass) {
+		   logger.log(Level.INFO,"Sorry this offer not availabe \n");
 		   return false;
 		   }
 	  
-       String st_offer = "insert into event values (Default"+",'noPer','"+d+"',"+"'"+Location_venue_cla+"',"+cap+",'"+amen+"',"+uID+","+vID+","+SP_fk_cla+")";
+       String st_offer = "insert into event values (Default"+",'noPer','"+d+"',"+"'"+locationVenueCla+"',"+cap+",'"+amen+"',"+uID+","+vID+","+sPFkCla+")";
        
-       //  JOptionPane.showMessageDialog(null,st_offer);
     //amen proplem
-    			Connection con_event;
+    			Connection conEvent;
     			try {
-					con_event = DriverManager.getConnection(url,userDB,passwordDB);	
-					Statement statement_offer = con_event.createStatement();					
+					conEvent = DriverManager.getConnection(url,userDB,passwordDB);	
+					Statement statementOffer = conEvent.createStatement();					
 			
 				
-					int x = statement_offer.executeUpdate(st_offer);
-					String get_index_last_row="select * from event";
-					Statement St_getRow = con_event.createStatement();
-					ResultSet rsRow=St_getRow.executeQuery(get_index_last_row);
+					int x = statementOffer.executeUpdate(st_offer);
+					String getIndexLastRow="select * from event";
+					Statement stGetRow = conEvent.createStatement();
+					ResultSet rsRow=stGetRow.executeQuery(getIndexLastRow);
 					rsRow.next();
 					int indexEventRow = rsRow.getInt(1);
 					setCalender(d,startHourFromUser,endHourFromUser,true,indexEventRow);
@@ -543,23 +525,22 @@ if(ret= Does_venue_capasity(vID,cap)&&Does_venue_time(vID,d,startHourFromUser,en
 					 
 					
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				};	 
 		  
      return true;         	
 }
 else { 
-if(!get_is_venue_av()){
-	System.out.printf("Sorry Not available \n");
+if(!getIsVenueAv()){
+	logger.log(Level.INFO,"Sorry Not available \n");
 }	
-if(!get_is_venue_cap()){
+if(!getIsVenueCap()){
 	
-System.out.printf("Sorry Tha Capasity not enough \n");	
+logger.log(Level.INFO,"Sorry Tha Capasity not enough \n");	
 }
 
-if(!get_is_venue_time()){
-	System.out.printf("Sorry The Time Overlap \n");	
+if(!getIsVenueTime()){
+	logger.log(Level.INFO,"Sorry The Time Overlap \n");	
 }
 }
 
@@ -567,7 +548,7 @@ return ret;
 
 }
 //////////////////////////////////
-public boolean setCalender(String D,int s,int e,boolean is_a,int indexEventRow) 
+public boolean setCalender(String d,int s,int e,boolean isA,int indexEventRow) 
 {
 
 	LocalTime s2 = LocalTime.of(s,0);
@@ -578,22 +559,21 @@ public boolean setCalender(String D,int s,int e,boolean is_a,int indexEventRow)
 	   String userDB ="postgres";
 	   String passwordDB="12345";
 	
-	   Connection con_calender;
+	   Connection conCalender;
 	  		
 	try {
 		
 		
-		 String sqlInsertToCalender = "insert into calender values("+"default,"+"'"+D+"',"+"'"+s2+"'"+","+"'"+e2+"'"+","+indexEventRow+","+is_a+")";
-	     System.out.printf(sqlInsertToCalender);
+		 String sqlInsertToCalender = "insert into calender values("+"default,"+"'"+d+"',"+"'"+s2+"'"+","+"'"+e2+"'"+","+indexEventRow+","+isA+")";
+	    logger.log(Level.INFO,sqlInsertToCalender);
 	
 		 JOptionPane.showMessageDialog(null,sqlInsertToCalender);
-		con_calender = DriverManager.getConnection(url,userDB,passwordDB);
-		Statement statement_calender = con_calender.createStatement();					
-		 int x = statement_calender.executeUpdate(sqlInsertToCalender); 
+		conCalender = DriverManager.getConnection(url,userDB,passwordDB);
+		Statement statementCalender = conCalender.createStatement();					
+		 int x = statementCalender.executeUpdate(sqlInsertToCalender); 
 			
 		 return true;
 	} catch (SQLException e1) {
-		// TODO Auto-generated catch block
 		e1.printStackTrace();
 		return false;
 	}	
