@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UserLoginPage {
     private String whoLastLogin;
@@ -23,6 +25,7 @@ protected boolean loginFlag;
     private String userPassword;
     private int userIDFromDB;
 
+ 	 private static final Logger logger = Logger.getLogger(UserLoginPage.class.getName());
        
 
     public int getUserId() {
@@ -62,8 +65,9 @@ protected boolean loginFlag;
 	        String s2=resultSet.getString(7);
 		   
 	        if(s1.equals(user_email)&&s2.equals(user_password)) {
-	        	 System.out.printf("s1: "+s1+"\n");
-	 		     System.out.printf("s2: "+s2+"\n");
+			
+	 logger.info("s1: " + s1 +"\n");
+        logger.info("s2: " + s2 +)"\n");
 	 		     
 		    	
 					this.Admin_is_login=false;
