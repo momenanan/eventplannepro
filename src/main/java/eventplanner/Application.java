@@ -94,9 +94,10 @@ public boolean doesVenueAv(int vNumber){
 			
 			while(rsVenue.next()){
 				if(rsVenue.getString(1).equals(Integer.toString(vNumber)))
-				{					
+				{
+					isVenueAv=rsVenue.getBoolean(2);
        
-					if(isVenueAv=rsVenue.getBoolean(2)){     
+					if(isVenueAv){     
 						
                locationVenueCla=rsVenue.getString(5);
 			   feesVenueCla=rsVenue.getInt(6);
