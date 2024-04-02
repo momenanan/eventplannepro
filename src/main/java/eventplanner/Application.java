@@ -45,6 +45,7 @@ private static final String PASSWORDDB=System.getenv("VAR");
 	private static final String SELECTALLFROMEVENT = "select * from event";
 	private static final String SELECTALLFROMCELENDER = "select * from celender";
 	private static final String SELECTALLFROMOFFER = "select * from offer";
+	private static final String LOG_MESSAGE_FORMAT = "offer_id: %s    ser_Type : %s    serP_name : %s    ser_Av : %s    sp_fk: %s    fees: %s\n";
 
 
 
@@ -118,10 +119,6 @@ public boolean doesVenueAv(int vNumber){
 				return false;
 				
 			}
-	finally{
-
-		
-	}
 			
 
 	
@@ -284,10 +281,11 @@ public void getListOffer()
 	        int spFk = rsOffer.getInt(5);
 	        int feesOffer = rsOffer.getInt(6);
 	   
-logger.log(Level.INFO, String.format("offer_id: %s    ser_Type : %s    serP_name : %s    ser_Av : %s    sp_fk: %s    fees: %s\n", oId, serType, serPName, serAv, spFk, feesOffer));
+    logger.log(Level.INFO, String.format(LOG_MESSAGE_FORMAT, oId, serType, serPName, serAv, spFk, feesOffer));
 	        
       				}
 			} catch (SQLException e) {
+				logger.log(Level.SEVERE, "Error occurred while logging information", e);
 				e.printStackTrace();
 			}   
     
