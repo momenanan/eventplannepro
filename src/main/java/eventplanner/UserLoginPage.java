@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.sql.Statement;
+
 
 public class UserLoginPage {
     private String whoLastLogin;
@@ -51,7 +53,7 @@ protected boolean loginFlag;
 	public boolean isValidCredentials(String userEmail, String userPassword,String typeOf) throws SQLException {
 		 ConnectDB conDB = new ConnectDB();
 		 
-		 String sql = "SELECT * FROM "+type_of+"";
+		 String sql = "SELECT * FROM "+typeOf+"";
 		
 		 try {
     	       Statement stmt = conDB.getConnection().createStatement();
@@ -64,40 +66,40 @@ protected boolean loginFlag;
 	        String s1=resultSet.getString(6);
 	        String s2=resultSet.getString(7);
 		   
-	        if(s1.equals(user_email)&&s2.equals(user_password)) {
+	        if(s1.equals(userEmail)&&s2.equals(userPassword)) {
 			
 	 logger.info("s1: " + s1 +"\n");
-        logger.info("s2: " + s2 +)"\n");
+        logger.info("s2: " + s2 +"\n");
 	 		     
 		    	
-					this.Admin_is_login=false;
-					this.user_is_login=false;
-					this.sutvise_is_login=false;
-					this.login_flag=false;
+					this.adminIsLogin=false;
+					this.userIsLogin=false;
+					this.surviseIsLogin=false;
+					this.loginFlag=false;
 			
 			
 			
-					if(type_of.equals(type_admin))
+					if(typeOf.equals(typeAdmin))
 					{
 						
-						this.Admin_is_login=true;
-						this.login_flag=true;
-						WhoLastLogIn=type_admin;
+						this.adminIsLogin=true;
+						this.loginFlag=true;
+						whoLastLogin=typeAdmin;
 					return true;
 					}
-					else if(type_of.equals(type_user)) 
+					else if(typeOf.equals(typeUser)) 
 					{
-						UserIDFromDB=resultSet.getInt(1);
-						this.user_is_login=true;
-						UserLogInPass=this.login_flag=true;
-						WhoLastLogIn=type_user;
+						userIDFromDB=resultSet.getInt(1);
+						this.userIsLogin=true;
+						userLoginPass=this.loginFlag=true;
+						whoLastLogin=typeUser;
 					return true;
 					}  
 					else 
 					{
-						this.sutvise_is_login=true;
-						this.login_flag=true;
-						WhoLastLogIn=type_sutvise;
+						this.surviseIsLogin=true;
+						this.loginFlag=true;
+						whoLastLogin=typeSupervisor;
 				return true;
 					}
 								
@@ -125,58 +127,58 @@ protected boolean loginFlag;
 	
 	public boolean is_user_logged() 
 	{
-		return this.login_flag;
+		return this.loginFlag;
 	}
 	
 	public boolean Logout() 
 	{
-		this.login_flag=false;
-		return this.login_flag;
+		this.loginFlag=false;
+		return this.loginFlag;
 	}
 	
 	public boolean is_Admin_logged()
 	{
-	  return this.Admin_is_login;	
+	  return this.adminIsLogin;	
 	}
 	
 	public boolean is_User_logged()
 	{
-		return this.user_is_login;
+		return this.userIsLogin;
 	}
 	
 	public boolean is_survise_logged()
 	{
-		return this.sutvise_is_login;
+		return this.surviseIsLogin;
 	}
 	
 	public boolean Admin_logout()
 	{
-		this.Admin_is_login=false;
-		return this.Admin_is_login;
+		this.adminIsLogin=false;
+		return this.adminIsLogin;
 	}
 	
 	public boolean user_logout()
 	{
-		this.user_is_login=false;
-		return this.user_is_login;
+		this.userIsLogin=false;
+		return this.userIsLogin;
 	}
 	
 	public boolean survise_logout()
 	{
-		this.sutvise_is_login=false;
-		return this.sutvise_is_login;
+		this.surviseIsLogin=false;
+		return this.surviseIsLogin;
 	}
     public String getUser_email() {
-        return this.user_email;
+        return this.userEmail;
     }
 
     
     public String getWhoLogIn(){
-    return WhoLastLogIn;	
+    return whoLastLogin;	
     	
     }
  
     public boolean getIfUserLogIn(){
-    	return UserLogInPass;
+    	return userLoginPass;
     }
 }
