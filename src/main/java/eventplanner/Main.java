@@ -26,6 +26,10 @@ public class Main {
     private static Registration registration = new Registration();
     
     private static Apps calendarObj = new Apps();
+	    private static final Logger LOGGER = Logger.getLogger(YourClassName.class.getName());
+	    private static final String SEPARATOR_LINE = "+------------+--------------------------------------------+";
+
+
     
     
     //////////////////////////////////////////////////////////
@@ -60,9 +64,9 @@ public class Main {
 
     public static void viewCalendar() {
     	 LOGGER.info("Calendar View:");
-        LOGGER.info("+------------+--------------------------------------------+");
+        LOGGER.info(SEPARATOR_LINE);
         LOGGER.info("|    Date    |                   Events                   |");
-        LOGGER.info("+------------+--------------------------------------------+");
+        LOGGER.info(SEPARATOR_LINE);
 
         // Iterate over each day in the month
         LocalDate startDate = currentYearMonth.atDay(1);
