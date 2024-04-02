@@ -109,9 +109,25 @@ public boolean doesVenueAv(int vNumber){
 			}
 			return false;
 	
-		} finally {
-			e.printStackTrace();
-      return false;
+		}
+			catch(SQLException e){
+				e.printStackTrace();
+				return false;
+				
+			}
+			finally
+			{
+				try {
+        if (statementVenue != null) {
+            statementVenue.close();
+        }
+        if (conVenue != null) {
+            conVenue.close();
+        }
+    } catch (SQLException e) {
+        e.printStackTrace(); // Or any other error handling mechanism
+    }
+      
 		}
 
 	
