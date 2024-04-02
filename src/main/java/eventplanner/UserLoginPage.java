@@ -40,9 +40,9 @@ protected boolean loginFlag;
 		user_password=null;
 	}
 	
-	public UserLoginPage(String userEmail, String UserPassword) { 
-		this.UserEmail=UserEmail;
-		this.UserPassword=UserPassword;
+	public UserLoginPage(String userEmail, String userPassword) { 
+		this.userEmail=userEmail;
+		this.userPassword=userPassword;
 	}
 	
 	public boolean isValidCredentials(String UserEmail, String UserPassword,String TypeOf) throws SQLException {
