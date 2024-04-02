@@ -1,14 +1,14 @@
 package eventplanner;
 
 
-
+//import java.awt.HeadlessException;
 import java.sql.Connection;
-
+//import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+//import java.sql.Time;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -41,6 +41,8 @@ private int  feesVenueCla;
 private int sPFkCla;
 private int eventFkAfterCreation;
 private static final Logger logger = Logger.getLogger(Application.class.getName());
+private static final String dbUrl = "jdbc:postgresql://localhost:5432/postgres";
+
 
 
 
@@ -73,7 +75,7 @@ public boolean isBookVenuePass(boolean av1,boolean t1,boolean cap1){
 public boolean doesVenueAv(int vNumber){
 
 	
-	String url = "jdbc:postgresql://localhost:5432/postgres";
+	String url = dbUrl;
 	String userDB ="postgres";
 	String passwordDB="12345";
 	  
@@ -123,7 +125,7 @@ return((endAt<=cEnd)&&(cStart<endAt))||(cStart<=startAt)&&(cEnd>startAt)||(cEnd<
 public boolean doesVenueTime(int vNumber,String d,int startAt,int endAt){
 	
 	
-	String url = "jdbc:postgresql://localhost:5432/postgres";
+	String url = dbUrl;
 	String userDB ="postgres";
 	String passwordDB="12345";
     String st_event = "select * from event";
@@ -201,7 +203,7 @@ public boolean doesVenueTime(int vNumber,String d,int startAt,int endAt){
 
 public boolean doesVenueCapasity(int vNumber,int guistNumber){
 	
-	String url = "jdbc:postgresql://localhost:5432/postgres";
+	String url = dbUrl;
 	String userDB ="postgres";
 	String passwordDB="12345";
     String stVenue = "select * from venue";
@@ -246,7 +248,7 @@ public void getListOffer()
 {
 
 	
-	String url = "jdbc:postgresql://localhost:5432/postgres";
+	String url = dbUrl;
 	String userDB ="postgres";
 	String passwordDB="12345";
     String stOffer = "select * from offer";
@@ -293,7 +295,7 @@ return isFilterOffer;
 
 public int numberColumnAfterFilter(int minPrice,int maxPrice) {
 	
-	String url = "jdbc:postgresql://localhost:5432/postgres";
+	String url = dbUrl;
 	String userDB ="postgres";
 	String passwordDB="12345";
     String stOffer = "select count(feesofoffer) from offer where feesofoffer between "+minPrice+"and "+maxPrice;
@@ -316,7 +318,7 @@ public int numberColumnAfterFilter(int minPrice,int maxPrice) {
 }
 public ArrayList<Integer> filter_price_offer(int minPrice,int maxPrice){
 	
-	String url = "jdbc:postgresql://localhost:5432/postgres";
+	String url = dbUrl;
 	String userDB ="postgres";
 	String passwordDB="12345";
     String stOffer = "select * from offer";
@@ -359,7 +361,7 @@ public ArrayList<Integer> filter_price_offer(int minPrice,int maxPrice){
 
 public ArrayList<Integer> filter_price_venue(int minPrice,int maxPrice){
 	
-	String url = "jdbc:postgresql://localhost:5432/postgres";
+	String url = dbUrl;
 	String userDB ="postgres";
 	String passwordDB="12345";
     String stVenue = "select * from venue";
@@ -417,7 +419,7 @@ public boolean getIsChoosePass(){
 return isChoosePass;	
 }
 public boolean chooseOffer(int oNumber){
-	String url = "jdbc:postgresql://localhost:5432/postgres";
+	String url = dbUrl;
 	String userDB ="postgres";
 	String passwordDB="12345";
     String stOffer = "select * from offer";
@@ -454,7 +456,7 @@ return isSearchPass;
 public boolean getSearchVendor(int nVendor){
 	
 	
-	String url = "jdbc:postgresql://localhost:5432/postgres";
+	String url = dbUrl;
 	String userDB ="postgres";
 	String passwordDB="12345";
     String stOffer = "select * from offer";
@@ -490,7 +492,7 @@ logger.log(Level.INFO,"2-"+doesVenueTime(vID,d,startHourFromUser,endHourFromUser
 
 if(ret= doesVenueCapasity(vID,cap)&&doesVenueTime(vID,d,startHourFromUser,endHourFromUser)&&doesVenueAv(vID)){
 
-	   String url = "jdbc:postgresql://localhost:5432/postgres";
+	   String url = dbUrl;
 	   String userDB ="postgres";
 	   String passwordDB="12345";
 	   
@@ -555,7 +557,7 @@ public boolean setCalender(String d,int s,int e,boolean isA,int indexEventRow)
 	
 	LocalTime e2 = s2.plusHours(e-s);
 	
-	   String url = "jdbc:postgresql://localhost:5432/postgres";
+	   String url = dbUrl;
 	   String userDB ="postgres";
 	   String passwordDB="12345";
 	
