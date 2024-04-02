@@ -73,6 +73,9 @@ public boolean getWhoLogIn(){
 public boolean getIsVenueTime(){
 	return isVenueTime;	
 }
+public void logInfo(String message) {
+    logger.log(Level.INFO, message);
+}
 
 public boolean isBookVenuePass(boolean av1,boolean t1,boolean cap1){		
 		return av1&&t1&&cap1; 
