@@ -23,6 +23,8 @@ public class Main {
     private static YearMonth currentYearMonth;
     private static Map<LocalDate, List<String>> eventsMap; // Map to store events for each date
     private static UserLoginPage logInPage = new UserLoginPage();
+    private static Registration registration = new Registration();
+    
     private static Apps CalendarObj = new Apps();
     
     
@@ -138,10 +140,6 @@ public class Main {
 
     public static void main(String[] args) {
         
-    	
-    	//Application a2 = new Application();
-    	//a2.setCalender("2024-05-03",3,4,true);
-    	
     	System.out.println("Welcome In Event Planner System \n   " +
                 " Plases Choose Role : \n" +
                 "1- Admin \n" +
@@ -152,7 +150,7 @@ public class Main {
         Scanner s = new Scanner(System.in);
         //int Choose = s.findInLine(".").charAt(0);
        int Choose = s.nextInt();
-System.out.printf("your choose is: "+Choose+"\n");
+   System.out.printf("your choose is: "+Choose+"\n");
         if(Choose == 1){
             System.out.println("Welcome In Admin Page" +
                     " Plases Choose Page : \n" +
@@ -165,15 +163,50 @@ System.out.printf("your choose is: "+Choose+"\n");
 
             if(ChoosePage==1){
 
+        
+            	
+         	   System.out.printf("Enter FirstName Admin: \n");
+        	   String FN = p.nextLine(); 
+        	   
+        	   System.out.printf("Enter SecName Admin: \n");
+        	   String SN = p.nextLine(); 
+        	  
+        	   System.out.printf("Enter LasttName Admin: \n");
+        	   String LN = p.nextLine(); 
+        	  
+        	   System.out.printf("Enter email  Admin :\n");
+        	   String Eamail = p.nextLine(); 
+        	   
+        	   System.out.printf("Enter UserName Admin \n");
+        	   String userName = p.nextLine(); 
+        	   
+        	   System.out.printf("Enter password Admin \n");
+        	   String password = p.nextLine(); 
+        	   
+        	   System.out.printf("Enter Date: \n");
+        	   String DateOfUser = p.nextLine();         	   
+        	   
+			try {
+				registration.setData(FN,SN,LN,Eamail,userName,password,DateOfUser,"admin");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
           	  // Register Page
             }
 
             if(ChoosePage==2){
         
+
+            	
+       
+            	
+            	
           	  // Login Page
             }
 
         }
+        //////////////////////////////////Now User
         
         if(Choose == 2){
             System.out.println("Welcome In User Page" +
@@ -188,6 +221,37 @@ System.out.printf("your choose is: "+Choose+"\n");
           int ChoosePage = p.nextInt();
             System.out.printf("chose page is "+ ChoosePage+"\n");
             if(ChoosePage==1){
+            	
+           try {
+        	   System.out.printf("Enter FirstName: \n");
+        	   String FN = p.nextLine(); 
+        	   
+        	   System.out.printf("Enter SecName: \n");
+        	   String SN = p.nextLine(); 
+        	  
+        	   System.out.printf("Enter LasttName: \n");
+        	   String LN = p.nextLine(); 
+        	  
+        	   System.out.printf("Enter email: \n");
+        	   String Eamail = p.nextLine(); 
+        	   
+        	   System.out.printf("Enter UserName: \n");
+        	   String userName = p.nextLine(); 
+        	   
+        	   System.out.printf("Enter password: \n");
+        	   String password = p.nextLine(); 
+        	   
+        	   System.out.printf("Enter Date: \n");
+        	   String DateOfUser = p.nextLine();         	   
+        	   
+			registration.setData(FN,SN,LN,Eamail,userName,password,DateOfUser,"users");
+		
+           
+           } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 		
+            	
           	  // Register Page
             }
 
@@ -208,7 +272,7 @@ System.out.printf("your choose is: "+Choose+"\n");
                 try {	
                 	
                 	boolean t;
-                    if(t = (logInPage.is_valid_credentials(LineUserName,LinePassword,"users")))
+                    if(t = (logInPage. isValidCredentials(LineUserName,LinePassword,"users")))
                     {
                     	int userID=logInPage.getUID();
 //                    	t = (logInPage.is_valid_credentials(LineUserName,LinePassword,"users"))
@@ -216,12 +280,53 @@ System.out.printf("your choose is: "+Choose+"\n");
                     	System.out.printf("Please choose on of these operation: \n");
                       Scanner chooseFromLogIn=new Scanner(System.in);
                       
-                      System.out.printf("1- create Event:- "+"\n"+"2-");
+                      System.out.printf("1- create Event:- "+"\n");
  
                       int x = chooseFromLogIn.nextInt();
                       if(x == 1){
                     	 Application a = new Application();
-                                         	 
+                                         
+                    	 System.out.printf("if you want to filter venue press f \n");
+                    	 Scanner ch=new Scanner(System.in);
+                    	 String fa = ch.nextLine();
+                    	 
+                    	
+                    	 if(fa.equals("f")) {
+                    		 System.out.printf("Enter min price:\n");
+                    		 int min1 = chooseFromLogIn.nextInt();
+                    		 
+                    		 System.out.printf("Enter max price:\n");
+                    		 int max1 = chooseFromLogIn.nextInt();
+                    		 
+                    		 a.filter_price_venue(min1, max1);
+                    
+                    		 
+                    	 }
+                   //////////////////////////////////
+                    	 
+                    	 System.out.printf("if you want to filter offer press f \n");
+                    	 String fa2 = ch.nextLine();
+                              	 
+                    	 if(fa2.equals("f")) {
+                    		 System.out.printf("Enter min price:\n");
+                    		 int min1 = chooseFromLogIn.nextInt();
+                    		 
+                    		 System.out.printf("Enter max price:\n");
+                    		 int max1 = chooseFromLogIn.nextInt();
+                    		 
+                    		 a.filter_price_offer(min1, max1);
+                    
+                    		 
+                    	 }
+                    	 
+                    	 
+                    	 
+                    	 
+                    	 
+                    	 
+                    	 
+                    	 
+                  /////////////////////////////////////  	 
                    System.out.printf("enter The venue you want:\n");	
                          int v1= chooseFromLogIn.nextInt();
                    System.out.printf("enter The Number of guist:\n");	
@@ -248,14 +353,12 @@ System.out.printf("your choose is: "+Choose+"\n");
                    System.out.printf("enter amenetis:\n");
                    String a1 = chooseFromLogIn.nextLine();
                    
-                   ////////////////////
-    
+                   ////////////////////////    
                    a.Go_book(v1,g1,Da,s1,e1,a1,userID);                    	
-    
-                      }
-                      
-                    	
-                    }else {
+                   
+                      }                    	
+                    }else
+                    {
         
                     	System.out.printf("Sorry Log In faild");
                     }
@@ -299,64 +402,7 @@ System.out.printf("your choose is: "+Choose+"\n");
         
         }
 
-   
-  		
-    	
-/////////////////////////////////////////////////////////    	
 
-    
-/////////////////////////
-    /* 
-    Main calendar = new Main();
-        Scanner scanner = new Scanner(System.in);
-
-        // View the calendar
-        calendar.viewCalendar();
-
-        // Input new task or appointment
-        System.out.println("Enter task/appointment details:");
-        System.out.print("Date (YYYY-MM-DD): ");
-        String dateString = scanner.next();
-        System.out.print("Time (HH:mm AM/PM): ");
-        String time = scanner.next();
-        System.out.print("Description: ");
-        String description = scanner.next();
-
-        // Parse input and create task
-        LocalDate taskDate = LocalDate.parse(dateString, DateTimeFormatter.ISO_DATE);
-        calendar.createTask(taskDate, time, description);
-
-        // View updated calendar
-        calendar.viewCalendar();
-
-        // Input task details to edit
-        System.out.println("Enter task/appointment details to edit:");
-        System.out.print("Date (YYYY-MM-DD): ");
-        String editDate = scanner.next();
-        System.out.print("Time (HH:mm AM/PM): ");
-        String editTime = scanner.next();
-        System.out.print("Description: ");
-        String editDescription = scanner.next();
-        scanner.nextLine(); // Consume newline character
-
-        // Input new task details
-        System.out.println("Enter new task/appointment details:");
-        System.out.print("Date (YYYY-MM-DD): ");
-        String newDateString = scanner.next();
-        System.out.print("Time (HH:mm AM/PM): ");
-        String newTime = scanner.next();
-        System.out.print("Description: ");
-        String newDescription = scanner.next();
-
-        // Parse input and edit task
-        LocalDate editTaskDate = LocalDate.parse(editDate, DateTimeFormatter.ISO_DATE);
-        calendar.editTask(editTaskDate, editTime, editDescription, newTime, newDescription);
-
-        // View updated calendar
-        calendar.viewCalendar();
-
-        scanner.close();
-    */
     }
 }
     
