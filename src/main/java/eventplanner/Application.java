@@ -42,6 +42,11 @@ private static final String DBURL = "jdbc:postgresql://localhost:5432/postgres";
 private static final String POSTGRESDBNAME = "postgres";
 private static final String PASSWORDDB = "12345";
 	private static final String SELECTALLFROMVENUE = "select * from venue";
+	private static final String SELECTALLFROMEVENT = "select * from event";
+	private static final String SELECTALLFROMCELENDER = "select * from celender";
+	private static final String SELECTALLFROMOFFER = "select * from offer";
+
+
 
 
 
@@ -131,9 +136,9 @@ public boolean doesVenueTime(int vNumber,String d,int startAt,int endAt){
 	String url = DBURL;
 	String userDB =POSTGRESDBNAME;
 	String passwordDB=PASSWORDDB;
-    String st_event = "select * from event";
+    String stEvent = SELECTALLFROMEVENT;
  
-    String st_calender = "select * from calender";
+    String stCalender = SELECTALLFROMCELENDER;
 			  
 	  
 	  
@@ -141,11 +146,11 @@ public boolean doesVenueTime(int vNumber,String d,int startAt,int endAt){
 	  try {
 			Connection conEvent=DriverManager.getConnection(url,userDB,passwordDB);;	 
 			Statement statementEvent=conEvent.createStatement();				
-			ResultSet rsEvent = statementEvent.executeQuery(st_event);
+			ResultSet rsEvent = statementEvent.executeQuery(stEvent);
 		
 			Connection conCalender=DriverManager.getConnection(url,userDB,passwordDB);;	 
 			Statement statementCalender=conCalender.createStatement();				
-			ResultSet rsCalender = statementCalender.executeQuery(st_calender);
+			ResultSet rsCalender = statementCalender.executeQuery(stCalender);
 		
 			
 		
@@ -254,7 +259,7 @@ public void getListOffer()
 	String url = DBURL;
 	String userDB =POSTGRESDBNAME;
 	String passwordDB=PASSWORDDB;
-    String stOffer = "select * from offer";
+    String stOffer = SELECTALLFROMOFFER;
  
     
    			try {
@@ -324,7 +329,7 @@ public ArrayList<Integer> filter_price_offer(int minPrice,int maxPrice){
 	String url = DBURL;
 	String userDB =POSTGRESDBNAME;
 	String passwordDB=PASSWORDDB;
-    String stOffer = "select * from offer";
+    String stOffer = SELECTALLFROMOFFER;
  
 	 ArrayList <Integer> a = new ArrayList<Integer>();	
 			try {
@@ -425,7 +430,7 @@ public boolean chooseOffer(int oNumber){
 	String url = DBURL;
 	String userDB =POSTGRESDBNAME;
 	String passwordDB=PASSWORDDB;
-    String stOffer = "select * from offer";
+    String stOffer = SELECTALLFROMOFFER;
  
     
 			try {
@@ -462,7 +467,7 @@ public boolean getSearchVendor(int nVendor){
 	String url = DBURL;
 	String userDB =POSTGRESDBNAME;
 	String passwordDB=PASSWORDDB;
-    String stOffer = "select * from offer";
+    String stOffer = SELECTALLFROMOFFER;
  
     
 			try {
