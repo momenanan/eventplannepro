@@ -168,10 +168,10 @@ public boolean doesVenueTime(int vNumber,String d,int startAt,int endAt){
 						String sDateCalender=rsCalender.getString(2);	
 									
 						logger.log(Level.INFO, String.format("  vN: %d", vNumber));
+                                        logger.log(Level.INFO, String.format("    d: %s  and in cal : %s", d, sDateCalender));
+                                       logger.log(Level.INFO, String.format("     start_at: %d", startAt));
+                                          logger.log(Level.INFO, String.format("       end_at: %d", endAt));
 
-						logger.log(Level.INFO,"    d: "+d+"  and in cal : "+sDateCalender);
-						logger.log(Level.INFO,"     start_at: "+startAt);
-						logger.log(Level.INFO,"       end_at: "+endAt);
 			
 						if(rsCalender.getInt(5)==xEventIx){
 			
