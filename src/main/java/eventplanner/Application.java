@@ -130,7 +130,7 @@ public boolean notValidTime(int startAt,int endAt,int cStart,int cEnd){
 return((endAt<=cEnd)&&(cStart<endAt))||(cStart<=startAt)&&(cEnd>startAt)||(cEnd<=endAt)&&(cStart>=startAt);
 }
 
-public boolean doesVenueTime(int vNumber,String d,int startAt,int endAt){
+public boolean doesVenueTime(int vNumber,String d,int startAt,int endAt) throws SQLException{
 	
 	
 	String url = DBURL;
