@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,7 +17,7 @@ import javax.swing.JOptionPane;
 
 public class Application {
 
-private user u;
+private User u;
 
 /////////////////////////////////////
 private boolean flag;
@@ -30,10 +31,13 @@ private boolean is_filter_offer;
 private boolean is_offer_av;
 private boolean is_choose_pass;
 private boolean is_search_pass;
+private boolean is_filter_venue;
 ////////////////////////////////////
 private String Location_venue_cla;
 private int  fees_venue_cla;
 private int SP_fk_cla;
+private int event_fk_after_creation;
+
 
 public boolean get_is_venue_av(){
 return is_venue_av;		
@@ -355,7 +359,69 @@ public ArrayList<Integer> filter_price_offer(int min_price,int max_price){
 				return a;
 			}   		
 }
+/////////////////////////////////////////////////
 
+
+public ArrayList<Integer> filter_price_venue(int min_price,int max_price){
+	
+	String url = "jdbc:postgresql://localhost:5432/postgres";
+	String userDB ="postgres";
+	String passwordDB="12345";
+    String st_venue = "select * from venue";
+ 
+    
+	 ArrayList <Integer> a = new ArrayList<Integer>();	
+			try {
+				
+				Connection con_venue=DriverManager.getConnection(url,userDB,passwordDB);;	 
+				Statement statement_venue=con_venue.createStatement();					
+				ResultSet rs_venue = statement_venue.executeQuery(st_venue);
+				int fees_venue;
+					
+				while(rs_venue.next())
+				 {
+			         fees_venue = rs_venue.getInt(6);	
+
+			         if(is_min_max(min_price,max_price,fees_venue)) {	
+	
+			int v_id = rs_venue.getInt(1);		
+			
+			boolean v_av = rs_venue.getBoolean(2);	
+	        String cap = rs_venue.getString(3);
+	        String amen = rs_venue.getString(4);
+	        String location =rs_venue.getString(5);
+	        int fees = rs_venue.getInt(6);
+	        is_filter_venue = true;
+			a.add(fees_venue);
+			
+	        System.out.printf("venue_id : "+v_id+"    v_avai : "+v_av+"    cap : "+cap+"    amenities : "+amen+"    Location : "+location+"    fees: "+fees+"\n");
+  	} 
+			         
+      				}
+				return a;		        
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return a;
+			}   		
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////
 public boolean return_offer_av(){
 	return is_offer_av;
 }
@@ -422,7 +488,6 @@ public boolean get_search_vendor(int n_vendor){
 						return is_search_pass=rs_offer.getBoolean(4);					
 					}
 				}
-
 				
 				return false;
 				} catch (SQLException e) {
@@ -467,9 +532,14 @@ if(ret= Does_venue_capasity(vID,cap)&&Does_venue_time(vID,d,startHourFromUser,en
 					Statement statement_offer = con_event.createStatement();					
 			
 				
-					setCalender(d,startHourFromUser,endHourFromUser,true);
 					int x = statement_offer.executeUpdate(st_offer);
-						
+					String get_index_last_row="select * from event";
+					Statement St_getRow = con_event.createStatement();
+					ResultSet rsRow=St_getRow.executeQuery(get_index_last_row);
+					rsRow.next();
+					int indexEventRow = rsRow.getInt(1);
+					setCalender(d,startHourFromUser,endHourFromUser,true,indexEventRow);
+							
 					 
 					
 				} catch (SQLException e) {
@@ -497,11 +567,12 @@ return ret;
 
 }
 //////////////////////////////////
-public boolean setCalender(String D,int s,int e,boolean is_a) 
+public boolean setCalender(String D,int s,int e,boolean is_a,int indexEventRow) 
 {
 
-	Time s2 = new Time(s);
-	Time e2 = new Time(e);
+	LocalTime s2 = LocalTime.of(s,0);
+	
+	LocalTime e2 = s2.plusHours(e-s);
 	
 	   String url = "jdbc:postgresql://localhost:5432/postgres";
 	   String userDB ="postgres";
@@ -512,7 +583,7 @@ public boolean setCalender(String D,int s,int e,boolean is_a)
 	try {
 		
 		
-		 String sqlInsertToCalender = "insert into calender values("+"default,"+"'"+D+"',"+"'"+s2+"'"+","+"'"+e2+"'"+","+SP_fk_cla+","+is_a+")";
+		 String sqlInsertToCalender = "insert into calender values("+"default,"+"'"+D+"',"+"'"+s2+"'"+","+"'"+e2+"'"+","+indexEventRow+","+is_a+")";
 	     System.out.printf(sqlInsertToCalender);
 	
 		 JOptionPane.showMessageDialog(null,sqlInsertToCalender);
