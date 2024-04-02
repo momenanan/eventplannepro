@@ -2,7 +2,7 @@ package eventplanner;
 
 import java.sql.Date;
 
-public class EventClass {
+public class eventClass {
 
     private int eventId;
     private String periodOfEvent;
@@ -15,7 +15,7 @@ public class EventClass {
     private int serviceProviderForeignKey;
 
     // Constructors
-    public EventClass() {
+    public eventClass() {
         // Default constructor
     }    
 
