@@ -140,7 +140,7 @@ protected boolean loginFlag;
 	  return this.adminIsLogin;	
 	}
 	
-	public boolean isUserLogged()
+	public boolean isUserLogged1()
 	{
 		return this.userIsLogin;
 	}
