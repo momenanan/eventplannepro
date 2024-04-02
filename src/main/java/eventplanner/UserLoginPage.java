@@ -8,12 +8,12 @@ import javax.swing.JOptionPane;
 public class UserLoginPage {
     private String whoLastLogin;
     private boolean userLoginPass;
-
-        protected boolean AdminIsLogin; 
-	protected boolean UserIsLogin; 
-	protected boolean SurviseIsLogin;
 	
-	protected boolean LoginFlag;	
+protected boolean adminIsLogin; 
+protected boolean userIsLogin; 
+protected boolean surviseIsLogin;
+protected boolean loginFlag; 
+	
     
     private String typeAdmin = "admin";
     private String typeUser = "user";
