@@ -26,7 +26,7 @@ public class Main {
     private static Registration registration = new Registration();
     
     private static Apps calendarObj = new Apps();
-	    private static final Logger LOGGER = Logger.getLogger(YourClassName.class.getName());
+	    private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
 	    private static final String SEPARATOR_LINE = "+------------+--------------------------------------------+";
 
 
