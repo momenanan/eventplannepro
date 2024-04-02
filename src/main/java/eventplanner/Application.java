@@ -40,7 +40,7 @@ private int eventFkAfterCreation;
 private static final Logger logger = Logger.getLogger(Application.class.getName());
 private static final String DBURL = "jdbc:postgresql://localhost:5432/postgres";
 private static final String POSTGRESDBNAME = "postgres";
-private static final String PASSWORDDB = "12345momenhh&*@#";
+private static final String PASSWORDDB = "12345";
 	private static final String SELECTALLFROMVENUE = "select * from venue";
 	private static final String SELECTALLFROMEVENT = "select * from event";
 	private static final String SELECTALLFROMCELENDER = "select * from celender";
@@ -88,7 +88,7 @@ public boolean doesVenueAv(int vNumber){
 	String passwordDB=PASSWORDDB;
 	  
 	  String stVenue = SELECTALLFROMVENUE;
-		try(Connection conVenue=DriverManager.getConnection(url,userDB,passwordDB); ) {
+		try(Connection conVenue=DriverManager.getConnection(url,userDB,passwordDB) ) {
 			Statement statementVenue=conVenue.createStatement();				
 			ResultSet rsVenue = statementVenue.executeQuery(stVenue);
 			
@@ -142,8 +142,7 @@ public boolean doesVenueTime(int vNumber,String d,int startAt,int endAt){
 	  
 	  
 	  
-	  try {
-			Connection conEvent=DriverManager.getConnection(url,userDB,passwordDB);;	 
+	  try(Connection conEvent=DriverManager.getConnection(url,userDB,passwordDB)	 ) {
 			Statement statementEvent=conEvent.createStatement();				
 			ResultSet rsEvent = statementEvent.executeQuery(stEvent);
 		
@@ -217,9 +216,8 @@ public boolean doesVenueCapasity(int vNumber,int guistNumber){
     String stVenue = SELECTALLFROMVENUE;
  
    
-			try {
+			try(Connection conVenue=DriverManager.getConnection(url,userDB,passwordDB)) {
 				
-				Connection conVenue=DriverManager.getConnection(url,userDB,passwordDB);;	 
 				Statement statementVenue=conVenue.createStatement();					
 				ResultSet rsVenue = statementVenue.executeQuery(stVenue);
 				
@@ -262,9 +260,8 @@ public void getListOffer()
     String stOffer = SELECTALLFROMOFFER;
  
     
-   			try {
+   			try(Connection conOffer=DriverManager.getConnection(url,userDB,passwordDB)) {
 				
-				Connection conOffer=DriverManager.getConnection(url,userDB,passwordDB);;	 
 				Statement statementOffer=conOffer.createStatement();					
 				ResultSet rsOffer = statementOffer.executeQuery(stOffer);
 				
@@ -332,9 +329,8 @@ public ArrayList<Integer> filter_price_offer(int minPrice,int maxPrice){
     String stOffer = SELECTALLFROMOFFER;
  
 	 ArrayList <Integer> a = new ArrayList<Integer>();	
-			try {
+			try(Connection conOffer=DriverManager.getConnection(url,userDB,passwordDB)) {
 				
-				Connection conOffer=DriverManager.getConnection(url,userDB,passwordDB);;	 
 				Statement statementOffer=conOffer.createStatement();					
 				ResultSet rsOffer = statementOffer.executeQuery(stOffer);
 				int feesOffer;
@@ -376,9 +372,8 @@ public ArrayList<Integer> filter_price_venue(int minPrice,int maxPrice){
  
     
 	 ArrayList <Integer> a = new ArrayList<Integer>();	
-			try {
+			try(Connection conVenue=DriverManager.getConnection(url,userDB,passwordDB)) {
 				
-				Connection conVenue=DriverManager.getConnection(url,userDB,passwordDB);;	 
 				Statement statementVenue=conVenue.createStatement();					
 				ResultSet rsVenue = statementVenue.executeQuery(stVenue);
 				int feesVenue;
@@ -433,9 +428,8 @@ public boolean chooseOffer(int oNumber){
     String stOffer = SELECTALLFROMOFFER;
  
     
-			try {
+			try(Connection conOffer=DriverManager.getConnection(url,userDB,passwordDB)	 ) {
 				
-				Connection conOffer=DriverManager.getConnection(url,userDB,passwordDB);;	 
 				Statement statementOffer=conOffer.createStatement();					
 				ResultSet rsOffer = statementOffer.executeQuery(stOffer);
 				while(rsOffer.next()){
@@ -470,9 +464,8 @@ public boolean getSearchVendor(int nVendor){
     String stOffer = SELECTALLFROMOFFER;
  
     
-			try {
+			try(Connection conOffer=DriverManager.getConnection(url,userDB,passwordDB)) {
 				
-				Connection conOffer=DriverManager.getConnection(url,userDB,passwordDB);;	 
 				Statement statementOffer=conOffer.createStatement();					
 				ResultSet rsOffer = statementOffer.executeQuery(stOffer);
 				while(rsOffer.next()){
