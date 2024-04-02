@@ -84,15 +84,15 @@ public class Main {
 
             
             // Print date and events
-            System.out.printf("| %-11s| %-42s|\n", formattedDate, eventString.isEmpty() ? "No events" : eventString);
-
+		        String output = String.format("| %-11s| %-42s|%n", formattedDate, eventString.isEmpty() ? "No events" : eventString);
+		        LOGGER.info(output);
             
             // Move to the next day
             startDate = startDate.plusDays(1);
         }
 
         // Print calendar footer
-        System.out.println("+------------+--------------------------------------------+");
+LOGGER.info(SEPARATOR_LINE);
     }
 
     public void createTask(LocalDate date, String time, String description) {
