@@ -18,3 +18,4 @@ public abstract class User {
         this.password = password;
         isLogged = false; // Initializing boolean field
     }
+}
