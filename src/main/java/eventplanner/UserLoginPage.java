@@ -2,7 +2,6 @@ package eventplanner;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.Statement;
@@ -140,7 +139,7 @@ protected boolean loginFlag;
 	  return this.adminIsLogin;	
 	}
 	
-	public boolean isUserLogged1()
+	public boolean isUserLoggedd()
 	{
 		return this.userIsLogin;
 	}
