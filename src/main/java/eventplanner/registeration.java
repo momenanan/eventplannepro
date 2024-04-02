@@ -21,8 +21,8 @@ public class Registration {
         userpassword = null;
     }
 
-    public void setData(String fname,String secN,String lastN,String useremail, String username,String password,String BD, String type) throws SQLException {
-         ConnectDB conn = new ConnectDB();
+public void setData(String fname, String secN, String lastN, String useremail, String username, String password, String bd, String type) throws SQLException{         
+        ConnectDB conn = new ConnectDB();
         Connection conn1 = conn.getConnection();
        
        Statement stConn = conn1.createStatement();
