@@ -132,12 +132,12 @@ public class UserLoginPage {
 	  return this.Admin_is_login;	
 	}
 	
-	public boolean is_Customer_logged()
+	public boolean is_User_logged()
 	{
 		return this.user_is_login;
 	}
 	
-	public boolean is_Installer_logged()
+	public boolean is_survise_logged()
 	{
 		return this.sutvise_is_login;
 	}
@@ -148,13 +148,13 @@ public class UserLoginPage {
 		return this.Admin_is_login;
 	}
 	
-	public boolean Customer_logout()
+	public boolean user_logout()
 	{
 		this.user_is_login=false;
 		return this.user_is_login;
 	}
 	
-	public boolean Installer_logout()
+	public boolean survise_logout()
 	{
 		this.sutvise_is_login=false;
 		return this.sutvise_is_login;
