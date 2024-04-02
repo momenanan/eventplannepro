@@ -40,7 +40,7 @@ private int eventFkAfterCreation;
 private static final Logger logger = Logger.getLogger(Application.class.getName());
 private static final String DBURL = "jdbc:postgresql://localhost:5432/postgres";
 private static final String POSTGRESDBNAME = "postgres";
-private static final String PASSWORDDB = "12345momen";
+private static final String PASSWORDDB = "12345momen@#";
 	private static final String SELECTALLFROMVENUE = "select * from venue";
 	private static final String SELECTALLFROMEVENT = "select * from event";
 	private static final String SELECTALLFROMCELENDER = "select * from celender";
