@@ -355,7 +355,8 @@ public List<Integer> filterPriceOffer(int minPrice,int maxPrice){
 	        isFilterOffer = true;
 			a.add(feesOffer);
 			
-	        logger.log(Level.INFO,"offer_id : "+oId+"    ser_Type : "+serType+"    serP_name : "+serPName+"    ser_Av : "+serAv+"    sp_fk : "+spFk+"    fees: "+feesOffer+"\n");
+logger.log(Level.INFO, "offer_id : {0}    ser_Type : {1}    serP_name : {2}    ser_Av : {3}    sp_fk : {4}    fees: {5}\n",
+            oId, serType, serPName, serAv, spFk, feesOffer);
   	} 
 			         
       				}
@@ -368,7 +369,7 @@ public List<Integer> filterPriceOffer(int minPrice,int maxPrice){
 /////////////////////////////////////////////////
 
 
-public ArrayList<Integer> filterPriceVenue(int minPrice,int maxPrice){
+public List<Integer> filterPriceVenue(int minPrice,int maxPrice){
 	
 	String url = DBURL;
 	String userDB =POSTGRESDBNAME;
