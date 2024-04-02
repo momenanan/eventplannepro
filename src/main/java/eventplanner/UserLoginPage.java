@@ -9,9 +9,9 @@ public class UserLoginPage {
     private String whoLastLogin;
     private boolean userLoginPass;
 
-        private boolean AdminIsLogin; 
-	private boolean UserIsLogin; 
-	private boolean SurviseIsLogin;
+        protected boolean AdminIsLogin; 
+	protected boolean UserIsLogin; 
+	protected boolean SurviseIsLogin;
 	
 	protected boolean LoginFlag;	
     
