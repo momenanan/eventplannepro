@@ -39,6 +39,10 @@ private int sPFkCla;
 private int eventFkAfterCreation;
 private static final Logger logger = Logger.getLogger(Application.class.getName());
 private static final String DBURL = "jdbc:postgresql://localhost:5432/postgres";
+private static final String POSTGRESDBNAME = "postgres";
+private static final String PASSWORDDB = "12345";
+
+
 
 
 
@@ -72,9 +76,9 @@ public boolean isBookVenuePass(boolean av1,boolean t1,boolean cap1){
 public boolean doesVenueAv(int vNumber){
 
 	
-	String url = dbUrl;
-	String userDB ="postgres";
-	String passwordDB="12345";
+	String url = DBURL;
+	String userDB =POSTGRESDBNAME;
+	String passwordDB=PASSWORDDB;
 	  
 	  String stVenue = "select * from venue";
 		try {
@@ -122,9 +126,9 @@ return((endAt<=cEnd)&&(cStart<endAt))||(cStart<=startAt)&&(cEnd>startAt)||(cEnd<
 public boolean doesVenueTime(int vNumber,String d,int startAt,int endAt){
 	
 	
-	String url = dbUrl;
-	String userDB ="postgres";
-	String passwordDB="12345";
+	String url = DBURL;
+	String userDB =POSTGRESDBNAME;
+	String passwordDB=PASSWORDDB;
     String st_event = "select * from event";
  
     String st_calender = "select * from calender";
@@ -200,9 +204,9 @@ public boolean doesVenueTime(int vNumber,String d,int startAt,int endAt){
 
 public boolean doesVenueCapasity(int vNumber,int guistNumber){
 	
-	String url = dbUrl;
-	String userDB ="postgres";
-	String passwordDB="12345";
+	String url = DBURL;
+	String userDB =POSTGRESDBNAME;
+	String passwordDB=PASSWORDDB;
     String stVenue = "select * from venue";
  
    
@@ -245,9 +249,9 @@ public void getListOffer()
 {
 
 	
-	String url = dbUrl;
-	String userDB ="postgres";
-	String passwordDB="12345";
+	String url = DBURL;
+	String userDB =POSTGRESDBNAME;
+	String passwordDB=PASSWORDDB;
     String stOffer = "select * from offer";
  
     
@@ -292,9 +296,9 @@ return isFilterOffer;
 
 public int numberColumnAfterFilter(int minPrice,int maxPrice) {
 	
-	String url = dbUrl;
-	String userDB ="postgres";
-	String passwordDB="12345";
+	String url = DBURL;
+	String userDB =POSTGRESDBNAME;
+	String passwordDB=PASSWORDDB;
     String stOffer = "select count(feesofoffer) from offer where feesofoffer between "+minPrice+"and "+maxPrice;
  
 	Connection conOffer;
@@ -315,9 +319,9 @@ public int numberColumnAfterFilter(int minPrice,int maxPrice) {
 }
 public ArrayList<Integer> filter_price_offer(int minPrice,int maxPrice){
 	
-	String url = dbUrl;
-	String userDB ="postgres";
-	String passwordDB="12345";
+	String url = DBURL;
+	String userDB =POSTGRESDBNAME;
+	String passwordDB=PASSWORDDB;
     String stOffer = "select * from offer";
  
 	 ArrayList <Integer> a = new ArrayList<Integer>();	
@@ -358,9 +362,9 @@ public ArrayList<Integer> filter_price_offer(int minPrice,int maxPrice){
 
 public ArrayList<Integer> filter_price_venue(int minPrice,int maxPrice){
 	
-	String url = dbUrl;
-	String userDB ="postgres";
-	String passwordDB="12345";
+	String url = DBURL;
+	String userDB =POSTGRESDBNAME;
+	String passwordDB=PASSWORDDB;
     String stVenue = "select * from venue";
  
     
@@ -416,9 +420,9 @@ public boolean getIsChoosePass(){
 return isChoosePass;	
 }
 public boolean chooseOffer(int oNumber){
-	String url = dbUrl;
-	String userDB ="postgres";
-	String passwordDB="12345";
+	String url = DBURL;
+	String userDB =POSTGRESDBNAME;
+	String passwordDB=PASSWORDDB;
     String stOffer = "select * from offer";
  
     
@@ -453,9 +457,9 @@ return isSearchPass;
 public boolean getSearchVendor(int nVendor){
 	
 	
-	String url = dbUrl;
-	String userDB ="postgres";
-	String passwordDB="12345";
+	String url = DBURL;
+	String userDB =POSTGRESDBNAME;
+	String passwordDB=PASSWORDDB;
     String stOffer = "select * from offer";
  
     
@@ -489,9 +493,9 @@ logger.log(Level.INFO,"2-"+doesVenueTime(vID,d,startHourFromUser,endHourFromUser
 
 if(ret= doesVenueCapasity(vID,cap)&&doesVenueTime(vID,d,startHourFromUser,endHourFromUser)&&doesVenueAv(vID)){
 
-	   String url = dbUrl;
-	   String userDB ="postgres";
-	   String passwordDB="12345";
+	   String url = DBURL;
+	   String userDB =POSTGRESDBNAME;
+	   String passwordDB=PASSWORDDB;
 	   
 	 logger.log(Level.INFO,"Choose one of Them as offer you want: \n");	   
 	  getListOffer();
@@ -554,9 +558,9 @@ public boolean setCalender(String d,int s,int e,boolean isA,int indexEventRow)
 	
 	LocalTime e2 = s2.plusHours(e-s);
 	
-	   String url = dbUrl;
-	   String userDB ="postgres";
-	   String passwordDB="12345";
+	   String url = DBURL;
+	   String userDB =POSTGRESDBNAME;
+	   String passwordDB=PASSWORDDB;
 	
 	   Connection conCalender;
 	  		
