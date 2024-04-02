@@ -30,14 +30,14 @@ protected boolean loginFlag;
     }
 	public UserLoginPage() // initilazation for this calss
 	{
-		Admin_is_login=false;
-		user_is_login=false;
-		sutvise_is_login=false;
+		adminIsLogin=false;
+		userIsLogin=false;
+		surviseIsLogin=false;
 		
-		login_flag=false;
+		loginFlag=false;
 		
-		user_email=null;
-		user_password=null;
+		userEmail=null;
+		userPassword=null;
 	}
 	
 	public UserLoginPage(String userEmail, String userPassword) { 
@@ -45,7 +45,7 @@ protected boolean loginFlag;
 		this.userPassword=userPassword;
 	}
 	
-	public boolean isValidCredentials(String UserEmail, String UserPassword,String TypeOf) throws SQLException {
+	public boolean isValidCredentials(String userEmail, String userPassword,String typeOf) throws SQLException {
 		 ConnectDB conDB = new ConnectDB();
 		 
 		 String sql = "SELECT * FROM "+type_of+"";
