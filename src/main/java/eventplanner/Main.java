@@ -25,7 +25,7 @@ public class Main {
     private static UserLoginPage logInPage = new UserLoginPage();
     private static Registration registration = new Registration();
     
-    private static Apps CalendarObj = new Apps();
+    private static Apps calendarObj = new Apps();
     
     
     //////////////////////////////////////////////////////////
@@ -59,10 +59,10 @@ public class Main {
     }
 
     public static void viewCalendar() {
-    	System.out.println("Calendar View:");
-        System.out.println("+------------+--------------------------------------------+");
-        System.out.println("|    Date    |                   Events                   |");
-        System.out.println("+------------+--------------------------------------------+");
+    	 LOGGER.info("Calendar View:");
+        LOGGER.info("+------------+--------------------------------------------+");
+        LOGGER.info("|    Date    |                   Events                   |");
+        LOGGER.info("+------------+--------------------------------------------+");
 
         // Iterate over each day in the month
         LocalDate startDate = currentYearMonth.atDay(1);
