@@ -41,7 +41,6 @@ private static final Logger logger = Logger.getLogger(Application.class.getName(
 private static final String DBURL = "jdbc:postgresql://localhost:5432/postgres";
 private static final String POSTGRESDBNAME = "postgres";
 private static final String PASSWORDDB = "12345";
-	private static final String SELECTALLFROMVENUE = "select * from venue";
 
 
 
@@ -81,20 +80,20 @@ public boolean doesVenueAv(int vNumber){
 	String userDB =POSTGRESDBNAME;
 	String passwordDB=PASSWORDDB;
 	  
-	  String stVenue = SELECTALLFROMVENUE;
+	  String stVenue = "select * from venue";
 		try {
-			Connection con_venue=DriverManager.getConnection(url,userDB,passwordDB);;	 
-			Statement statement_venue=con_venue.createStatement();				
-			ResultSet rs_venue = statement_venue.executeQuery(stVenue);
+			Connection conVenue=DriverManager.getConnection(url,userDB,passwordDB); 
+			Statement statementVenue=conVenue.createStatement();				
+			ResultSet rsVenue = statementVenue.executeQuery(stVenue);
 			
-			while(rs_venue.next()){
-				if(rs_venue.getString(1).equals(Integer.toString(vNumber)))
+			while(rsVenue.next()){
+				if(rsVenue.getString(1).equals(Integer.toString(vNumber)))
 				{					
        
-					if(isVenueAv=rs_venue.getBoolean(2)){     
+					if(isVenueAv=rsVenue.getBoolean(2)){     
 						
-               locationVenueCla=rs_venue.getString(5);
-			   feesVenueCla=rs_venue.getInt(6);
+               locationVenueCla=rsVenue.getString(5);
+			   feesVenueCla=rsVenue.getInt(6);
                return true;
 					}		
 					
@@ -138,41 +137,41 @@ public boolean doesVenueTime(int vNumber,String d,int startAt,int endAt){
 	  
 	  
 	  try {
-			Connection con_event=DriverManager.getConnection(url,userDB,passwordDB);;	 
-			Statement statement_event=con_event.createStatement();				
-			ResultSet rs_event = statement_event.executeQuery(st_event);
+			Connection conEvent=DriverManager.getConnection(url,userDB,passwordDB);;	 
+			Statement statementEvent=conEvent.createStatement();				
+			ResultSet rsEvent = statementEvent.executeQuery(st_event);
 		
-			Connection con_calender=DriverManager.getConnection(url,userDB,passwordDB);;	 
-			Statement statement_calender=con_calender.createStatement();				
-			ResultSet rs_calender = statement_calender.executeQuery(st_calender);
+			Connection conCalender=DriverManager.getConnection(url,userDB,passwordDB);;	 
+			Statement statementCalender=conCalender.createStatement();				
+			ResultSet rsCalender = statementCalender.executeQuery(st_calender);
 		
 			
 		
-			while(rs_event.next()) {
+			while(rsEvent.next()) {
 				
-				int x1=rs_event.getInt(8);
-				int xEventIx=rs_event.getInt(1);
+				int x1=rsEvent.getInt(8);
+				int xEventIx=rsEvent.getInt(1);
 				
 				
 				if(sameVenue(x1,vNumber)) {
 				
 					
-					while(rs_calender.next()){
+					while(rsCalender.next()){
 
-						String sDateCalender=rs_calender.getString(2);	
+						String sDateCalender=rsCalender.getString(2);	
 									
 						logger.log(Level.INFO,"  vN: "+vNumber);
 						logger.log(Level.INFO,"    d: "+d+"  and in cal : "+sDateCalender);
 						logger.log(Level.INFO,"     start_at: "+startAt);
 						logger.log(Level.INFO,"       end_at: "+endAt);
 			
-						if(rs_calender.getInt(5)==xEventIx){
+						if(rsCalender.getInt(5)==xEventIx){
 			
 								if(timeRealistic(startAt,endAt)&&(sDateCalender.equals(d))){
 									
 									
-									String sStartCalender=rs_calender.getString(3);	
-									String sEndCalender=rs_calender.getString(4);	
+									String sStartCalender=rsCalender.getString(3);	
+									String sEndCalender=rsCalender.getString(4);	
 									
 									String s31=sStartCalender.substring(0,2);
 									    int cStart = Integer.parseInt(s31);
@@ -208,14 +207,14 @@ public boolean doesVenueCapasity(int vNumber,int guistNumber){
 	String url = DBURL;
 	String userDB =POSTGRESDBNAME;
 	String passwordDB=PASSWORDDB;
-    String stVenue = SELECTALLFROMVENUE;
+    String stVenue = "select * from venue";
  
    
 			try {
 				
-				Connection con_venue=DriverManager.getConnection(url,userDB,passwordDB);;	 
-				Statement statement_venue=con_venue.createStatement();					
-				ResultSet rsVenue = statement_venue.executeQuery(stVenue);
+				Connection conVenue=DriverManager.getConnection(url,userDB,passwordDB);;	 
+				Statement statementVenue=conVenue.createStatement();					
+				ResultSet rsVenue = statementVenue.executeQuery(stVenue);
 				
 				
 				while(rsVenue.next()){
@@ -258,9 +257,9 @@ public void getListOffer()
     
    			try {
 				
-				Connection con_offer=DriverManager.getConnection(url,userDB,passwordDB);;	 
-				Statement statement_offer=con_offer.createStatement();					
-				ResultSet rsOffer = statement_offer.executeQuery(stOffer);
+				Connection conOffer=DriverManager.getConnection(url,userDB,passwordDB);;	 
+				Statement statementOffer=conOffer.createStatement();					
+				ResultSet rsOffer = statementOffer.executeQuery(stOffer);
 				
 		    
 				while(rsOffer.next()){
@@ -366,7 +365,7 @@ public ArrayList<Integer> filter_price_venue(int minPrice,int maxPrice){
 	String url = DBURL;
 	String userDB =POSTGRESDBNAME;
 	String passwordDB=PASSWORDDB;
-    String stVenue = SELECTALLFROMVENUE;
+    String stVenue = "select * from venue";
  
     
 	 ArrayList <Integer> a = new ArrayList<Integer>();	
