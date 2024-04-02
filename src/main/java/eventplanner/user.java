@@ -8,12 +8,12 @@ public abstract class User {
     private boolean isLogged;
 
     // Default constructor
-    public User() {
+    protected User() {
         isLogged = false; // Initializing boolean field
     }
 
     // Constructor with email and password parameters
-    public User(String email, String password) {
+    protected User(String email, String password) {
         this.email = email;
         this.password = password;
         isLogged = false; // Initializing boolean field
