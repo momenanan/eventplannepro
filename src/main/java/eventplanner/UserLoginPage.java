@@ -40,14 +40,12 @@ protected boolean loginFlag;
 		user_password=null;
 	}
 	
-	public UserLoginPage(String user_email, String user_password) { 
-		// TODO Auto-generated constructor stub
+	public UserLoginPage(String userEmail, String UserPassword) { 
 		this.user_email=user_email;
 		this.user_password=user_password;
 	}
 	
-	public boolean isValidCredentials(String user_email, String user_password,String type_of) throws SQLException {
-		// TODO Auto-generated method stub
+	public boolean isValidCredentials(String UserEmail, String UserPassword,String TypeOf) throws SQLException {
 		 ConnectDB conDB = new ConnectDB();
 		 
 		 String sql = "SELECT * FROM "+type_of+"";
