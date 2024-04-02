@@ -147,7 +147,7 @@ public boolean doesVenueTime(int vNumber,String d,int startAt,int endAt){
 			Statement statementEvent=conEvent.createStatement();				
 			ResultSet rsEvent = statementEvent.executeQuery(stEvent);
 		
-			Connection conCalender=DriverManager.getConnection(url,userDB,passwordDB);;	 
+			Connection conCalender=DriverManager.getConnection(url,userDB,passwordDB);	 
 			Statement statementCalender=conCalender.createStatement();				
 			ResultSet rsCalender = statementCalender.executeQuery(stCalender);
 		
