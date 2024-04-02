@@ -41,6 +41,7 @@ private static final Logger logger = Logger.getLogger(Application.class.getName(
 private static final String DBURL = "jdbc:postgresql://localhost:5432/postgres";
 private static final String POSTGRESDBNAME = "postgres";
 private static final String PASSWORDDB = "12345";
+	private static final String SELECTALLFROMVENUE = "select * from venue";
 
 
 
@@ -80,7 +81,7 @@ public boolean doesVenueAv(int vNumber){
 	String userDB =POSTGRESDBNAME;
 	String passwordDB=PASSWORDDB;
 	  
-	  String stVenue = "select * from venue";
+	  String stVenue = SELECTALLFROMVENUE;
 		try {
 			Connection con_venue=DriverManager.getConnection(url,userDB,passwordDB);;	 
 			Statement statement_venue=con_venue.createStatement();				
@@ -207,7 +208,7 @@ public boolean doesVenueCapasity(int vNumber,int guistNumber){
 	String url = DBURL;
 	String userDB =POSTGRESDBNAME;
 	String passwordDB=PASSWORDDB;
-    String stVenue = "select * from venue";
+    String stVenue = SELECTALLFROMVENUE;
  
    
 			try {
@@ -365,7 +366,7 @@ public ArrayList<Integer> filter_price_venue(int minPrice,int maxPrice){
 	String url = DBURL;
 	String userDB =POSTGRESDBNAME;
 	String passwordDB=PASSWORDDB;
-    String stVenue = "select * from venue";
+    String stVenue = SELECTALLFROMVENUE;
  
     
 	 ArrayList <Integer> a = new ArrayList<Integer>();	
