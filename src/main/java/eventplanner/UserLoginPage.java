@@ -1,6 +1,5 @@
 package eventplanner;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -110,7 +109,7 @@ protected boolean loginFlag;
 		}
 		catch(SQLException e)
 		{
-			System.out.print(e);
+           logger.log(Level.INFO,"e");
 		}
 		return false;
 		
@@ -125,7 +124,7 @@ protected boolean loginFlag;
 	
 	
 	
-	public boolean is_user_logged() 
+	public boolean isUserLogged() 
 	{
 		return this.loginFlag;
 	}
